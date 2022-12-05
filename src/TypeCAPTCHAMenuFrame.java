@@ -18,8 +18,4 @@ public class TypeCAPTCHAMenuFrame extends JFrame{
         this.setLocationRelativeTo(null);
         new TypeCAPTCHAMenuPanel(currentPuzzle);
     }
-
-    public void CloseFrame(){
-        super.dispose();
-    }
 }
