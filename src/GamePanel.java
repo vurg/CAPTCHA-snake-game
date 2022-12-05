@@ -41,6 +41,24 @@ public class GamePanel extends JPanel implements ActionListener {
 
     GamePanel (GameFrame gameFrame) {
         this.gameFrame = gameFrame;
+        nrOfSnakeBodyParts = 6;
+        snakeMovingDirection = 'R';
+        snake_X_Coordinates = new int[625];
+        snake_Y_Coordinates = new int[625];
+        myCAPTCHAPuzzle_X_Coordinates = new int[600];
+        myCAPTCHAPuzzle_Y_Coordinates = new int[600];
+
+        //initialize more
+
+
+    }
+
+    private void startGame(){
+
+    }
+
+    private void generateCAPTCHAImageCoordinates (){
+
     }
 
     @Override //check 
@@ -53,11 +71,35 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
 
+    private void youAreNot_A_Robot(){
+
+    }
+
+    private void gameOver(Graphics g){
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
         repaint();
         
+    }
+
+    private void move(){
+
+    }
+
+    private void checkLetter(){
+
+    }
+
+    private void checkCollisions(){
+
+    }
+
+    private void checkTime(){
+
     }
 
     
