@@ -1,19 +1,16 @@
 import java.util.ArrayList;
+import java.util.Random;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import java.awt.Image;
 import java.awt.Graphics;
+import java.awt.Color;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import java.util.Random;
-
-import javax.swing.Timer;
-
-import java.awt.Color;
-
 
 public class GamePanel extends JPanel implements ActionListener {
 
@@ -23,7 +20,6 @@ public class GamePanel extends JPanel implements ActionListener {
     
     private int nrOfSnakeBodyParts;
     private int nrOfApplesEaten;
-    private char snakeMovingDirection;
     private boolean gameIsRunning;
 
     private Timer timer;
@@ -49,7 +45,6 @@ public class GamePanel extends JPanel implements ActionListener {
 
         this.gameFrame = gameFrame;
         nrOfSnakeBodyParts = 6;
-        snakeMovingDirection = 'R';
         snake_X_Coordinates = new int[625];
         snake_Y_Coordinates = new int[625];
         myCAPTCHAPuzzle_X_Coordinates = new ArrayList<>();
@@ -62,20 +57,16 @@ public class GamePanel extends JPanel implements ActionListener {
 
         startGame();
 
-        //initialize more
-
-
     }
 
     private void startGame() {
+        
+        gameIsRunning = true;
 
         generateCAPTCHAImageCoordinates();
 
         Timer timer = new Timer(NEW_FRAME_DELAY, this);
         timer.start();
-        
-        gameIsRunning = true;
-
 
     }
 
@@ -112,35 +103,57 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-    @Override //check 
+    @Override
     public void paintComponent(Graphics g){
+
         super.paintComponent(g);
         draw(g);
+
     }
 
     private void draw(Graphics g){
 
-        for (int i = 0; i < nrOfSnakeBodyParts; i++) {
+        if (gameIsRunning){
 
-            if (i == 0){
-              
-                g.setColor(Color.RED);
-                g.drawRect(snake_X_Coordinates[i], snake_Y_Coordinates[i], BLOCK_LENGTH, BLOCK_LENGTH);
+            for (int i = 0; i < nrOfSnakeBodyParts; i++) {
 
-                if (snake_X_Coordinates[i] == snake_X_Coordinates[i+1] && snake_Y_Coordinates[i] == snake_Y_Coordinates[i+1]){
+                if (i == 0){
+                  
+                    g.setColor(Color.RED);
+                    g.drawRect(snake_X_Coordinates[i], snake_Y_Coordinates[i], BLOCK_LENGTH, BLOCK_LENGTH);
+    
+                    if (snake_X_Coordinates[i] == snake_X_Coordinates[i+1] && snake_Y_Coordinates[i] == snake_Y_Coordinates[i+1]){
+    
+                        return;
+    
+                    }
+    
+                } else {
+    
+                    g.setColor(Color.GREEN);
+                    g.drawRect(snake_X_Coordinates[i], snake_Y_Coordinates[i], BLOCK_LENGTH, BLOCK_LENGTH);
+    
+                }
+    
+            }
 
-                    return;
+        } else {
+
+            JButton mainManuButton = new JButton();
+            JButton retryButton = new JButton();
+            JButton type_CAPTCHA_Button = new JButton();
+
+            mainManuButton.addActionListener(new ActionListener(){
+                
+                @Override
+                public void actionPerformed(ActionEvent e) {
 
                 }
 
-            } else {
-
-                g.setColor(Color.GREEN);
-                g.drawRect(snake_X_Coordinates[i], snake_Y_Coordinates[i], BLOCK_LENGTH, BLOCK_LENGTH);
-
-            }
+            });
 
         }
+
     }
 
     private void youAreNot_A_Robot(){
@@ -153,7 +166,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-                
+
     }
 
     private void move(){
