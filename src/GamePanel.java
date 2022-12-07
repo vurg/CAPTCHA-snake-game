@@ -8,18 +8,19 @@ import javax.swing.Timer;
 import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Color;
-
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GamePanel extends JPanel implements ActionListener {
 
     private GameFrame gameFrame;
-    private final int BLOCK_LENGTH = 25;
-    private final int NEW_FRAME_DELAY = 200;
+    private final int BLOCK_LENGTH = 35;
+    private final int NEW_FRAME_DELAY_MILLISECONDS = 200;
     
     private int nrOfSnakeBodyParts;
-    private int nrOfApplesEaten;
+    private int nrOf_CAPTCHA_Taken;
     private boolean gameIsRunning;
 
     private Timer timer;
@@ -41,12 +42,20 @@ public class GamePanel extends JPanel implements ActionListener {
     private boolean isRobot;
     private int elapsedTime;
 
+    JButton mainMenuButton;
+    JButton retryButton;
+    JButton type_CAPTCHA_Button;
+
+
+
     GamePanel (GameFrame gameFrame) {
+
 
         this.gameFrame = gameFrame;
         nrOfSnakeBodyParts = 6;
-        snake_X_Coordinates = new int[625];
-        snake_Y_Coordinates = new int[625];
+        nrOf_CAPTCHA_Taken = 0;
+        snake_X_Coordinates = new int[600];
+        snake_Y_Coordinates = new int[600];
         myCAPTCHAPuzzle_X_Coordinates = new ArrayList<>();
         myCAPTCHAPuzzle_Y_Coordinates = new ArrayList<>();
         keyboardControls = new KeyboardControls();
@@ -54,6 +63,10 @@ public class GamePanel extends JPanel implements ActionListener {
         myCaptchaPuzzle = new CAPTCHA();
         myCaptchaPuzzle.generatePuzzle();
         myCAPTCHAPuzzleImageArrayList = myCaptchaPuzzle.getMyCAPTCHAImageArrayList();
+
+        mainMenuButton = new JButton();
+        retryButton = new JButton();
+        type_CAPTCHA_Button = new JButton();
 
         startGame();
 
@@ -65,8 +78,9 @@ public class GamePanel extends JPanel implements ActionListener {
 
         generateCAPTCHAImageCoordinates();
 
-        Timer timer = new Timer(NEW_FRAME_DELAY, this);
+        Timer timer = new Timer(NEW_FRAME_DELAY_MILLISECONDS, this);
         timer.start();
+
 
     }
 
@@ -82,7 +96,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
                 noSameCoordinates = true;
 
-                CAPTCHA_Image_X_Coordinate = random.nextInt(CAPTCHASnakeGame.GAME_HEIGHT / BLOCK_LENGTH) * BLOCK_LENGTH;
+                CAPTCHA_Image_X_Coordinate = random.nextInt((CAPTCHASnakeGame.GAME_WIDTH / 2) / BLOCK_LENGTH) * BLOCK_LENGTH;
                 CAPTCHA_Image_Y_Coordinate = random.nextInt(1, CAPTCHASnakeGame.GAME_HEIGHT / BLOCK_LENGTH) * BLOCK_LENGTH; //prev 1 row
 
                 for (int j = 0; j < myCAPTCHAPuzzleImageArrayList.size(); j++) {
@@ -113,6 +127,10 @@ public class GamePanel extends JPanel implements ActionListener {
 
     private void draw(Graphics g){
 
+        //left side of panel
+        g.setColor(Color.BLACK);
+        g.fillRect(0,0, CAPTCHASnakeGame.GAME_WIDTH / 2, CAPTCHASnakeGame.GAME_HEIGHT);
+
         if (gameIsRunning){
 
             for (int i = 0; i < nrOfSnakeBodyParts; i++) {
@@ -120,37 +138,63 @@ public class GamePanel extends JPanel implements ActionListener {
                 if (i == 0){
                   
                     g.setColor(Color.RED);
-                    g.drawRect(snake_X_Coordinates[i], snake_Y_Coordinates[i], BLOCK_LENGTH, BLOCK_LENGTH);
+                    g.fillRect(snake_X_Coordinates[i], snake_Y_Coordinates[i], BLOCK_LENGTH, BLOCK_LENGTH);
     
                     if (snake_X_Coordinates[i] == snake_X_Coordinates[i+1] && snake_Y_Coordinates[i] == snake_Y_Coordinates[i+1]){
     
-                        return;
+                        break;
     
                     }
     
                 } else {
     
                     g.setColor(Color.GREEN);
-                    g.drawRect(snake_X_Coordinates[i], snake_Y_Coordinates[i], BLOCK_LENGTH, BLOCK_LENGTH);
+                    g.fillRect(snake_X_Coordinates[i], snake_Y_Coordinates[i], BLOCK_LENGTH, BLOCK_LENGTH);
     
                 }
     
             }
 
-        } else {
+            for (int i = 0; i < myCAPTCHAPuzzleImageArrayList.size(); i++) {
 
-            JButton mainManuButton = new JButton();
-            JButton retryButton = new JButton();
-            JButton type_CAPTCHA_Button = new JButton();
+                g.drawImage(myCAPTCHAPuzzleImageArrayList.get(i), myCAPTCHAPuzzle_X_Coordinates.get(i), myCAPTCHAPuzzle_Y_Coordinates.get(i), null);
+    
+            }
 
-            mainManuButton.addActionListener(new ActionListener(){
+            //right side of panel
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("Courier", Font.ITALIC ,20));
+            FontMetrics fontMetrics = getFontMetrics(g.getFont());
+
+            g.drawString("Collect The Following CAPTCHA Symbols:", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Collect The Following CAPTCHA Symbols:") / 2), 100); //check
+
+            for (int i = nrOf_CAPTCHA_Taken; i < myCAPTCHAPuzzleImageArrayList.size(); i++) {
+
+                g.drawImage(myCAPTCHAPuzzleImageArrayList.get(i), (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (35 * myCAPTCHAPuzzleImageArrayList.size() / 2) + (35 * i), 200, null);
                 
-                @Override
-                public void actionPerformed(ActionEvent e) {
+            }
 
+            g.drawString("Collected:", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Collected:") / 2), 300); //check
+
+            if (nrOf_CAPTCHA_Taken == 0) {
+
+                g.drawString("None:", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Collected") / 2) + 50, 300); // check
+
+            } else {
+
+                for (int i = 0; i < nrOf_CAPTCHA_Taken; i++) {
+
+                    g.drawImage(myCAPTCHAPuzzleImageArrayList.get(i), (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (35 * myCAPTCHAPuzzleImageArrayList.size() / 2) + (35 * i), 350, null);
+    
                 }
 
-            });
+            }
+
+            g.drawString("Time Remaining: " + , (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Time Remaining: ") / 2), 500); //check
+
+        } else {
+
+            gameOver(g);
 
         }
 
@@ -161,6 +205,48 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     private void gameOver(Graphics g){
+
+            
+        mainMenuButton.addActionListener(new ActionListener(){
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                gameFrame.closeFrame();
+                new StartMenuFrame();
+
+
+            }
+
+        });
+
+
+        retryButton.addActionListener(new ActionListener(){
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                gameFrame.closeFrame();
+                new GameFrame();
+
+
+            }
+
+        });
+
+
+        type_CAPTCHA_Button.addActionListener(new ActionListener(){
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                gameFrame.closeFrame();
+                new TypeCAPTCHAMenuFrame();
+
+
+            }
+
+        });
 
     }
 
