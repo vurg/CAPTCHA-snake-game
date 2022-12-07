@@ -35,25 +35,19 @@ public class GamePanel extends JPanel implements ActionListener {
     private CAPTCHA myCaptchaPuzzle;
     private ArrayList<Image> myCAPTCHAPuzzleImageArrayList;
 
-    private int score;
-
     private final int TIME_LIMIT = 60;
 
     private boolean isRobot;
-    private int elapsedTime;
+    private int elapsedTimeMilliseconds;
 
-    JButton mainMenuButton;
-    JButton retryButton;
-    JButton type_CAPTCHA_Button;
-
-
+    private JButton mainMenuButton;
+    private JButton retryButton;
+    private JButton type_CAPTCHA_Button;
 
     GamePanel (GameFrame gameFrame) {
 
-
         this.gameFrame = gameFrame;
         nrOfSnakeBodyParts = 6;
-        nrOf_CAPTCHA_Taken = 0;
         snake_X_Coordinates = new int[600];
         snake_Y_Coordinates = new int[600];
         myCAPTCHAPuzzle_X_Coordinates = new ArrayList<>();
@@ -121,17 +115,26 @@ public class GamePanel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g){
 
         super.paintComponent(g);
-        draw(g);
+
+        if (!gameIsRunning && nrOfSnakeBodyParts == myCAPTCHAPuzzleImageArrayList.size()) {
+
+            drawVerificationSuccessScreen(g);
+
+        } else if (!gameIsRunning) {
+
+        } else {
+
+        }
+
+        drawRunningGame(g);
 
     }
 
-    private void draw(Graphics g){
+    private void drawRunningGame(Graphics g){
 
         //left side of panel
         g.setColor(Color.BLACK);
         g.fillRect(0,0, CAPTCHASnakeGame.GAME_WIDTH / 2, CAPTCHASnakeGame.GAME_HEIGHT);
-
-        if (gameIsRunning){
 
             for (int i = 0; i < nrOfSnakeBodyParts; i++) {
 
@@ -190,23 +193,16 @@ public class GamePanel extends JPanel implements ActionListener {
 
             }
 
-            g.drawString("Time Remaining: " + , (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Time Remaining: ") / 2), 500); //check
-
-        } else {
-
-            gameOver(g);
-
-        }
+            g.drawString("Time Remaining: " + (TIME_LIMIT - (elapsedTimeMilliseconds / 1000)), (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Time Remaining: ") / 2), 500); //check
 
     }
 
-    private void youAreNot_A_Robot(){
+    private void drawVerificationSuccessScreen(Graphics g) {
 
     }
 
-    private void gameOver(Graphics g){
+    private void drawVerificationFailureScreen(Graphics g){
 
-            
         mainMenuButton.addActionListener(new ActionListener(){
             
             @Override
@@ -273,3 +269,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     
 }
+
+
+// elapsedTime += 200. 10 / 3 = 3. 200 / 1000 = 0. 200.0 / 1000.0 = 0.2. time limit(60) - (elapsed time / 1000)
+// 1200, 1400. 1200 / 1000 = 1.2, 1.4, 1.6 
