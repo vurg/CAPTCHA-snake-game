@@ -43,6 +43,9 @@ public class GamePanel extends JPanel implements ActionListener {
     private JButton mainMenuButton;
     private JButton retryButton;
     private JButton type_CAPTCHA_Button;
+    private JButton exitButton;
+
+    private FontMetrics fontMetrics;
 
     GamePanel (GameFrame gameFrame) {
 
@@ -53,7 +56,6 @@ public class GamePanel extends JPanel implements ActionListener {
         myCAPTCHAPuzzle_X_Coordinates = new ArrayList<>();
         myCAPTCHAPuzzle_Y_Coordinates = new ArrayList<>();
         keyboardControls = new KeyboardControls();
-        addKeyListener(keyboardControls);
         myCaptchaPuzzle = new CAPTCHA();
         myCaptchaPuzzle.generatePuzzle();
         myCAPTCHAPuzzleImageArrayList = myCaptchaPuzzle.getMyCAPTCHAImageArrayList();
@@ -61,6 +63,10 @@ public class GamePanel extends JPanel implements ActionListener {
         mainMenuButton = new JButton();
         retryButton = new JButton();
         type_CAPTCHA_Button = new JButton();
+        exitButton = new JButton();
+
+        addKeyListener(keyboardControls);
+        setLayout(null);
 
         startGame();
 
@@ -124,7 +130,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         } else {
 
-        }
+        } //check
 
         drawRunningGame(g);
 
@@ -167,7 +173,7 @@ public class GamePanel extends JPanel implements ActionListener {
             //right side of panel
             g.setColor(Color.BLACK);
             g.setFont(new Font("Courier", Font.ITALIC ,20));
-            FontMetrics fontMetrics = getFontMetrics(g.getFont());
+            fontMetrics = getFontMetrics(g.getFont());
 
             g.drawString("Collect The Following CAPTCHA Symbols:", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Collect The Following CAPTCHA Symbols:") / 2), 100); //check
 
@@ -193,11 +199,39 @@ public class GamePanel extends JPanel implements ActionListener {
 
             }
 
-            g.drawString("Time Remaining: " + (TIME_LIMIT - (elapsedTimeMilliseconds / 1000)), (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Time Remaining: ") / 2), 500); //check
+            g.drawString("Time Remaining: " + (TIME_LIMIT - (elapsedTimeMilliseconds / 1000)) + "s", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Time Remaining: " + (TIME_LIMIT - (elapsedTimeMilliseconds / 1000)) + "s") / 2), 500); //check
 
     }
 
     private void drawVerificationSuccessScreen(Graphics g) {
+
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, CAPTCHASnakeGame.GAME_WIDTH, CAPTCHASnakeGame.GAME_HEIGHT);
+
+        for (int i = 0; i < myCAPTCHAPuzzleImageArrayList.size(); i++){
+            g.drawImage(myCAPTCHAPuzzleImageArrayList.get(i), (CAPTCHASnakeGame.GAME_WIDTH / 2) - (myCAPTCHAPuzzleImageArrayList.size() / 2) + (35 * i), 100, null);
+        }
+        
+        g.setColor(Color.BLUE);
+        fontMetrics = getFontMetrics(g.getFont());
+
+        g.drawString("Verification Complete", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Verification Complete") / 2), 200);
+
+        g.drawString("You Are Not A Robot!", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("You Are Not A Robot!") / 2), 300);
+
+        g.drawString("Time Elapsed: " + (elapsedTimeMilliseconds / 1000) + "s", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Time Elapsed: " + (elapsedTimeMilliseconds / 1000) + "s") / 2), 400);
+
+        exitButton.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - 50, 500, 100, 50);
+        add(exitButton);
+
+        exitButton.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e){
+                //check
+            }
+
+        });
 
     }
 
@@ -267,9 +301,4 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
 
-    
 }
-
-
-// elapsedTime += 200. 10 / 3 = 3. 200 / 1000 = 0. 200.0 / 1000.0 = 0.2. time limit(60) - (elapsed time / 1000)
-// 1200, 1400. 1200 / 1000 = 1.2, 1.4, 1.6 
