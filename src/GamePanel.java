@@ -39,6 +39,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     private boolean isRobot;
     private int elapsedTimeMilliseconds;
+    private int score;
 
     private JButton mainMenuButton;
     private JButton retryButton;
@@ -59,11 +60,11 @@ public class GamePanel extends JPanel implements ActionListener {
         myCaptchaPuzzle = new CAPTCHA();
         myCaptchaPuzzle.generatePuzzle();
         myCAPTCHAPuzzleImageArrayList = myCaptchaPuzzle.getMyCAPTCHAImageArrayList();
-
-        mainMenuButton = new JButton();
-        retryButton = new JButton();
-        type_CAPTCHA_Button = new JButton();
-        exitButton = new JButton();
+        
+        mainMenuButton = new JButton("Main Menu");
+        retryButton = new JButton("Retry");
+        type_CAPTCHA_Button = new JButton("Type CAPTCHA");
+        exitButton = new JButton("Exit");
 
         addKeyListener(keyboardControls);
         setLayout(null);
@@ -80,7 +81,6 @@ public class GamePanel extends JPanel implements ActionListener {
 
         Timer timer = new Timer(NEW_FRAME_DELAY_MILLISECONDS, this);
         timer.start();
-
 
     }
 
@@ -122,17 +122,19 @@ public class GamePanel extends JPanel implements ActionListener {
 
         super.paintComponent(g);
 
-        if (!gameIsRunning && nrOfSnakeBodyParts == myCAPTCHAPuzzleImageArrayList.size()) {
+        if (gameIsRunning == false && score == myCAPTCHAPuzzleImageArrayList.size()) {
 
             drawVerificationSuccessScreen(g);
 
-        } else if (!gameIsRunning) {
+        } else if (gameIsRunning == false) {
+
+            drawVerificationFailureScreen(g);
 
         } else {
 
-        } //check
+            drawRunningGame(g);
 
-        drawRunningGame(g);
+        } //check
 
     }
 
@@ -213,7 +215,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
         
         g.setColor(Color.BLUE);
-        fontMetrics = getFontMetrics(g.getFont());
+        // fontMetrics = getFontMetrics(g.getFont());
 
         g.drawString("Verification Complete", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Verification Complete") / 2), 200);
 
@@ -221,7 +223,9 @@ public class GamePanel extends JPanel implements ActionListener {
 
         g.drawString("Time Elapsed: " + (elapsedTimeMilliseconds / 1000) + "s", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Time Elapsed: " + (elapsedTimeMilliseconds / 1000) + "s") / 2), 400);
 
-        exitButton.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - 50, 500, 100, 50);
+        g.drawString("Game Size: " + myCAPTCHAPuzzleImageArrayList.size() + " Symbols", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Game Size: " + myCAPTCHAPuzzleImageArrayList.size() + " Symbols") / 2), 500);
+
+        exitButton.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - 50, 600, 100, 50);
         add(exitButton);
 
         exitButton.addActionListener(new ActionListener(){
@@ -236,6 +240,24 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     private void drawVerificationFailureScreen(Graphics g){
+
+        g.setColor(Color.RED);
+
+        g.drawString("Game Over", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Game Over") / 2), 100);
+
+        g.setColor(Color.BLACK);
+
+        g.drawString("Verification Failed", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Verification Failed") / 2), 200);
+
+        mainMenuButton.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - (100 / 2) - 120, 600, 100, 50);
+        retryButton.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - (100 / 2), 600, 100, 50);
+        type_CAPTCHA_Button.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - (100 / 2) + 120, 600, 100, 50);
+
+        add(mainMenuButton);
+        add(retryButton);
+        add(type_CAPTCHA_Button);
+        
+
 
         mainMenuButton.addActionListener(new ActionListener(){
             
