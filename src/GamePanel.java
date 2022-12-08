@@ -93,7 +93,6 @@ public class GamePanel extends JPanel implements ActionListener {
         for (int i = 0; i < myCAPTCHAPuzzleImageArrayList.size(); i++) {
 
             do {
-
                 noSameCoordinates = true;
 
                 CAPTCHA_Image_X_Coordinate = random.nextInt((CAPTCHASnakeGame.GAME_WIDTH / 2) / BLOCK_LENGTH) * BLOCK_LENGTH;
@@ -304,23 +303,81 @@ public class GamePanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        elapsedTimeMilliseconds = elapsedTimeMilliseconds + timer.getDelay(); //or += 200
+        if (gameIsRunning)
+        {
+            move();
+            checkCollisions();
+            checkTime();
+            checkLetter();
+        }
     }
 
-    private void move(){
-
+    private void move(){ 
+        for (int i = nrOfSnakeBodyParts; i>0; i--){
+            snake_X_Coordinates[i] = snake_X_Coordinates[i-1];
+            snake_Y_Coordinates[i] = snake_Y_Coordinates[i-1];
+        }
+        switch(keyboardControls.getSnakeMovingDirection()) {
+            case 'L':
+            snake_X_Coordinates[0] = snake_X_Coordinates[0] - BLOCK_LENGTH;
+                break;
+            case 'R':
+            snake_X_Coordinates[0] = snake_X_Coordinates[0] + BLOCK_LENGTH;
+                break;
+            case 'U':
+            snake_Y_Coordinates[0] = snake_Y_Coordinates[0] - BLOCK_LENGTH;
+                break;
+            case 'D':
+            snake_Y_Coordinates[0] = snake_Y_Coordinates[0] + BLOCK_LENGTH;
+                break;
+        }
     }
 
     private void checkLetter(){
-
+        for (int i=score; i<myCAPTCHAPuzzleImageArrayList.size(); i++){
+            if((snake_X_Coordinates[0] == myCAPTCHAPuzzle_X_Coordinates.get(score)) && (snake_Y_Coordinates[0] == myCAPTCHAPuzzle_Y_Coordinates.get(score))) {
+                nrOfSnakeBodyParts++;
+                score++;
+        }
+        else if((snake_X_Coordinates[0] == myCAPTCHAPuzzle_X_Coordinates.get(i)) && (snake_Y_Coordinates[0] == myCAPTCHAPuzzle_Y_Coordinates.get(i))){
+            gameIsRunning = false;
+        }
     }
+}
 
     private void checkCollisions(){
-
+        if (score == myCAPTCHAPuzzleImageArrayList.size()){
+            gameIsRunning = false;
+            isRobot = true;
+        }
+        for(int i = nrOfSnakeBodyParts;i>0;i--) {
+            if((snake_X_Coordinates[0] == snake_X_Coordinates[i])&& (snake_Y_Coordinates[0] == snake_Y_Coordinates[i])) {
+                gameIsRunning = false;
+                break;
+            }
+        }
+        if(snake_X_Coordinates[0] < 0) {
+            gameIsRunning = false;
+        }
+        if(snake_X_Coordinates[0] > CAPTCHASnakeGame.GAME_WIDTH  - BLOCK_LENGTH) {
+            gameIsRunning = false;
+        }
+        if(snake_Y_Coordinates[0] < 0) {
+            gameIsRunning = false;
+        }
+        if(snake_Y_Coordinates[0] > CAPTCHASnakeGame.GAME_HEIGHT  - BLOCK_LENGTH) {
+            gameIsRunning = false;
+        }
+        if(!gameIsRunning) {
+            timer.stop();
+        }
     }
 
     private void checkTime(){
-
+        if (elapsedTimeMilliseconds >= TIME_LIMIT*1000){
+            gameIsRunning = false;
+        }
     }
 
 }
