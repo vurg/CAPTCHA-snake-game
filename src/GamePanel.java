@@ -82,7 +82,6 @@ public class GamePanel extends JPanel implements ActionListener {
         Timer timer = new Timer(NEW_FRAME_DELAY_MILLISECONDS, this);
         timer.start();
 
-
     }
 
     private void generateCAPTCHAImageCoordinates () {
