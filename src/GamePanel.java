@@ -21,7 +21,11 @@ public class GamePanel extends JPanel implements ActionListener {
     
     private int nrOfSnakeBodyParts;
     private int nrOf_CAPTCHA_Taken;
-    private boolean gameIsRunning;
+    private boolean gameIsRunning = false;
+    static final int PANEL_WIDTH = 700; 
+    static final int PANEL_HEIGHT = 525;
+    static final int element_size = 35;
+    KeyboardControls controls;
 
     private Timer timer;
     private Random random;
@@ -34,11 +38,13 @@ public class GamePanel extends JPanel implements ActionListener {
     private KeyboardControls keyboardControls;
     private CAPTCHA myCaptchaPuzzle;
     private ArrayList<Image> myCAPTCHAPuzzleImageArrayList;
+    ArrayList<Integer> puzzlePositionX;
+    ArrayList<Integer> puzzlePositionY;
 
     private final int TIME_LIMIT = 60;
 
     private boolean isRobot;
-    private int elapsedTimeMilliseconds;
+    private int elapsedTimeMilliseconds = 0; //private int elapsedTimeMilliseconds;
     private int score;
 
     private JButton mainMenuButton;
@@ -94,7 +100,6 @@ public class GamePanel extends JPanel implements ActionListener {
         for (int i = 0; i < myCAPTCHAPuzzleImageArrayList.size(); i++) {
 
             do {
-
                 noSameCoordinates = true;
 
                 CAPTCHA_Image_X_Coordinate = random.nextInt((CAPTCHASnakeGame.GAME_WIDTH / 2) / BLOCK_LENGTH) * BLOCK_LENGTH;
@@ -200,7 +205,8 @@ public class GamePanel extends JPanel implements ActionListener {
     
                 }
 
-            }
+            } 
+            //to implement a getDirection method?
 
             g.drawString("Time Remaining: " + (TIME_LIMIT - (elapsedTimeMilliseconds / 1000)) + "s", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Time Remaining: " + (TIME_LIMIT - (elapsedTimeMilliseconds / 1000)) + "s") / 2), 500); //check
 
@@ -305,23 +311,81 @@ public class GamePanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        elapsedTimeMilliseconds = elapsedTimeMilliseconds + timer.getDelay(); 
+        if (gameIsRunning)
+        {
+            move();
+            checkCollisions();
+            checkTime();
+            checkLetter();
+        }
     }
 
     private void move(){
-
+        for (int i = nrOfSnakeBodyParts; i>0; i--){
+            snake_X_Coordinates[i] = snake_X_Coordinates[i-1];
+            snake_Y_Coordinates[i] = snake_Y_Coordinates[i-1];
+        }
+        switch(controls.getDirection()) {
+            case 'L':
+            snake_X_Coordinates[0] = snake_X_Coordinates[0] - element_size;
+                break;
+            case 'R':
+            snake_X_Coordinates[0] = snake_X_Coordinates[0] + element_size;
+                break;
+            case 'U':
+            snake_Y_Coordinates[0] = snake_Y_Coordinates[0] - element_size;
+                break;
+            case 'D':
+            snake_Y_Coordinates[0] = snake_Y_Coordinates[0] + element_size;
+                break;
+        }
     }
 
     private void checkLetter(){
-
+        for (int i=score; i<myCAPTCHAPuzzleImageArrayList.size(); i++){
+            if((snake_X_Coordinates[0] == puzzlePositionX.get(score)) && (snake_Y_Coordinates[0] == puzzlePositionY.get(score))) {
+                nrOfSnakeBodyParts++;
+                score++;
+        }
+        else if((snake_X_Coordinates[0] == puzzlePositionX.get(i)) && (snake_Y_Coordinates[0] == puzzlePositionY.get(i))){
+            gameIsRunning = false;
+        }
     }
+}
 
     private void checkCollisions(){
-
+        if (score == myCAPTCHAPuzzleImageArrayList.size()){
+            gameIsRunning = false;
+            isRobot = true;
+        }
+        for(int i = nrOfSnakeBodyParts;i>0;i--) {
+            if((snake_X_Coordinates[0] == snake_X_Coordinates[i])&& (snake_Y_Coordinates[0] == snake_Y_Coordinates[i])) {
+                gameIsRunning = false;
+                break;
+            }
+        }
+        if(snake_X_Coordinates[0] < 0) {
+            gameIsRunning = false;
+        }
+        if(snake_X_Coordinates[0] > PANEL_WIDTH - element_size) {
+            gameIsRunning = false;
+        }
+        if(snake_Y_Coordinates[0] < 0) {
+            gameIsRunning = false;
+        }
+        if(snake_Y_Coordinates[0] > PANEL_HEIGHT - element_size) {
+            gameIsRunning = false;
+        }
+        if(!gameIsRunning) {
+            timer.stop();
+        }
     }
 
     private void checkTime(){
-
+        if (elapsedTimeMilliseconds >= TIME_LIMIT*1000){
+            gameIsRunning = false;
+        }
     }
 
 }
