@@ -1,4 +1,3 @@
-package CAPTCHASnakeGame;
 
 import javax.swing.*;
 import java.awt.*;
