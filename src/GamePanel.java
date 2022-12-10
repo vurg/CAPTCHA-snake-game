@@ -37,7 +37,7 @@ import java.awt.event.ActionListener;
 
     private final int TIME_LIMIT = 60;
 
-    private boolean isRobot;
+    // private boolean isRobot;
     private int elapsedTimeMilliseconds;
     private int score;
 
@@ -349,7 +349,7 @@ import java.awt.event.ActionListener;
     private void checkCollisions(){
         if (score == myCAPTCHAPuzzleImageArrayList.size()){
             gameIsRunning = false;
-            isRobot = true;
+           // isRobot = true;
         }
         for(int i = nrOfSnakeBodyParts;i>0;i--) {
             if((snake_X_Coordinates[0] == snake_X_Coordinates[i])&& (snake_Y_Coordinates[0] == snake_Y_Coordinates[i])) {
