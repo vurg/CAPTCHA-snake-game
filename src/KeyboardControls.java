@@ -1,7 +1,7 @@
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class KeyboardControls extends KeyAdapter {
+ class KeyboardControls extends KeyAdapter {
 
     private char snakeMovingDirection;
 

@@ -2,7 +2,7 @@ import javax.swing.JFrame;
 
 import java.awt.Dimension;
 
-public class GameFrame extends JFrame {
+ class GameFrame extends JFrame {
 
     GameFrame () {
         add(new GamePanel(this));

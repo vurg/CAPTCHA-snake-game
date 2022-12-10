@@ -13,7 +13,7 @@ import java.awt.FontMetrics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GamePanel extends JPanel implements ActionListener {
+ class GamePanel extends JPanel implements ActionListener {
 
     private GameFrame gameFrame;
     private final int BLOCK_LENGTH = 35;

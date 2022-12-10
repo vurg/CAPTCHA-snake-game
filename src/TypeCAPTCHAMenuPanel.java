@@ -1,12 +1,10 @@
-package CAPTCHASnakeGame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
-public class TypeCAPTCHAMenuPanel extends JPanel{
+ class TypeCAPTCHAMenuPanel extends JPanel{
 
     private CAPTCHA myCAPTCHAPuzzle;
 

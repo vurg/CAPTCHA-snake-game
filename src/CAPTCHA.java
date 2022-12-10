@@ -1,11 +1,10 @@
-package CAPTCHASnakeGame;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class CAPTCHA {
+ class CAPTCHA {
+    
     public static final String UPPER_CASE= "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     public static final String SWEDISH_UPPER_CASE= "ÅÄÖ";
     public static final String LOWER_CASE= "abcdefghijklmnopqrstuvwxyz";
