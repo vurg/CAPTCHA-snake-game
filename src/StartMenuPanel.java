@@ -12,6 +12,8 @@ class StartMenuPanel extends JPanel {
 
     StartMenuPanel (StartMenuFrame startMenuFrame) {
 
+        setVisible(true);
+
         JLabel startMessageLabel = new JLabel("Welcome to the CAPTCHA snake game!");
         startMessageLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
         startMessageLabel.setForeground(Color.BLACK);

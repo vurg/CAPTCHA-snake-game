@@ -8,13 +8,11 @@ import java.awt.event.KeyEvent;
     KeyboardControls () {
 
         snakeMovingDirection = 'R';
-
     }
 
     public char getSnakeMovingDirection() {
         
         return snakeMovingDirection;
-
     }
     
     @Override

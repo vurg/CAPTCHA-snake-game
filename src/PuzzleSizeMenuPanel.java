@@ -77,7 +77,7 @@ public class PuzzleSizeMenuPanel extends JPanel {
         });
     }
 
-    public static int getNumberOf_CAPTCHA_Symbols(){
+    public static int getNrOf_CAPTCHA_Symbols(){
         return numOf_CAPTCHA_Symbols;
     }
 

@@ -51,22 +51,24 @@ import java.awt.event.ActionListener;
     GamePanel (GameFrame gameFrame) {
 
         this.gameFrame = gameFrame;
+
         nrOfSnakeBodyParts = 6;
+        timer = new Timer(NEW_FRAME_DELAY_MILLISECONDS, this);
+        random = new Random();
         snake_X_Coordinates = new int[600];
         snake_Y_Coordinates = new int[600];
         myCAPTCHAPuzzle_X_Coordinates = new ArrayList<>();
         myCAPTCHAPuzzle_Y_Coordinates = new ArrayList<>();
         keyboardControls = new KeyboardControls();
+        addKeyListener(keyboardControls);
         myCaptchaPuzzle = new CAPTCHA();
         myCaptchaPuzzle.generatePuzzle();
         myCAPTCHAPuzzleImageArrayList = myCaptchaPuzzle.getMyCAPTCHAImageArrayList();
-        
         mainMenuButton = new JButton("Main Menu");
         retryButton = new JButton("Retry");
         type_CAPTCHA_Button = new JButton("Type CAPTCHA");
         exitButton = new JButton("Exit");
 
-        addKeyListener(keyboardControls);
         setLayout(null);
 
         startGame();
@@ -79,7 +81,6 @@ import java.awt.event.ActionListener;
 
         generateCAPTCHAImageCoordinates();
 
-        Timer timer = new Timer(NEW_FRAME_DELAY_MILLISECONDS, this);
         timer.start();
 
     }
@@ -98,15 +99,18 @@ import java.awt.event.ActionListener;
                 CAPTCHA_Image_X_Coordinate = random.nextInt((CAPTCHASnakeGame.GAME_WIDTH / 2) / BLOCK_LENGTH) * BLOCK_LENGTH;
                 CAPTCHA_Image_Y_Coordinate = random.nextInt(1, CAPTCHASnakeGame.GAME_HEIGHT / BLOCK_LENGTH) * BLOCK_LENGTH; //prev 1 row
 
-                for (int j = 0; j < myCAPTCHAPuzzleImageArrayList.size(); j++) {
 
-                    if (myCAPTCHAPuzzle_X_Coordinates.get(j) == CAPTCHA_Image_X_Coordinate && myCAPTCHAPuzzle_Y_Coordinates.get(j) == CAPTCHA_Image_Y_Coordinate) {
 
-                        noSameCoordinates = false;
-                        break;
+                    for (int j = 0; j < myCAPTCHAPuzzle_X_Coordinates.size(); j++) {
 
+                        if (myCAPTCHAPuzzle_X_Coordinates.get(j) == CAPTCHA_Image_X_Coordinate && myCAPTCHAPuzzle_Y_Coordinates.get(j) == CAPTCHA_Image_Y_Coordinate) {
+    
+                            noSameCoordinates = false;
+                            break;
+    
+                        }
                     }
-                }
+
 
             } while (noSameCoordinates == false);
 
@@ -122,11 +126,11 @@ import java.awt.event.ActionListener;
         super.paintComponent(g);
 
         if (gameIsRunning == false && score == myCAPTCHAPuzzleImageArrayList.size()) {
-
+            timer.stop();
             drawVerificationSuccessScreen(g);
 
         } else if (gameIsRunning == false) {
-
+            timer.stop();
             drawVerificationFailureScreen(g);
 
         } else {
@@ -188,7 +192,7 @@ import java.awt.event.ActionListener;
 
             if (nrOf_CAPTCHA_Taken == 0) {
 
-                g.drawString("None:", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Collected") / 2) + 50, 300); // check
+                g.drawString("None", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("None") / 2) + 150, 300); // check
 
             } else {
 
@@ -292,7 +296,7 @@ import java.awt.event.ActionListener;
             public void actionPerformed(ActionEvent e) {
 
                 gameFrame.closeFrame();
-                new TypeCAPTCHAMenuFrame();
+                new TypeCAPTCHAMenuFrame(myCaptchaPuzzle);
 
 
             }
@@ -303,7 +307,9 @@ import java.awt.event.ActionListener;
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        elapsedTimeMilliseconds = elapsedTimeMilliseconds + timer.getDelay(); //or += 200
+
+        elapsedTimeMilliseconds += NEW_FRAME_DELAY_MILLISECONDS;
+
         if (gameIsRunning)
         {
             move();
@@ -311,6 +317,7 @@ import java.awt.event.ActionListener;
             checkTime();
             checkLetter();
         }
+        repaint();
     }
 
     private void move(){ 
@@ -318,6 +325,8 @@ import java.awt.event.ActionListener;
             snake_X_Coordinates[i] = snake_X_Coordinates[i-1];
             snake_Y_Coordinates[i] = snake_Y_Coordinates[i-1];
         }
+
+        System.out.println(keyboardControls.getSnakeMovingDirection());
         switch(keyboardControls.getSnakeMovingDirection()) {
             case 'L':
             snake_X_Coordinates[0] = snake_X_Coordinates[0] - BLOCK_LENGTH;
@@ -335,46 +344,47 @@ import java.awt.event.ActionListener;
     }
 
     private void checkLetter(){
+
         for (int i=score; i<myCAPTCHAPuzzleImageArrayList.size(); i++){
+
             if((snake_X_Coordinates[0] == myCAPTCHAPuzzle_X_Coordinates.get(score)) && (snake_Y_Coordinates[0] == myCAPTCHAPuzzle_Y_Coordinates.get(score))) {
                 nrOfSnakeBodyParts++;
                 score++;
+            }
         }
-        else if((snake_X_Coordinates[0] == myCAPTCHAPuzzle_X_Coordinates.get(i)) && (snake_Y_Coordinates[0] == myCAPTCHAPuzzle_Y_Coordinates.get(i))){
+
+        if (score == myCAPTCHAPuzzleImageArrayList.size()){
             gameIsRunning = false;
         }
     }
-}
 
     private void checkCollisions(){
-        if (score == myCAPTCHAPuzzleImageArrayList.size()){
-            gameIsRunning = false;
-           // isRobot = true;
-        }
+
         for(int i = nrOfSnakeBodyParts;i>0;i--) {
-            if((snake_X_Coordinates[0] == snake_X_Coordinates[i])&& (snake_Y_Coordinates[0] == snake_Y_Coordinates[i])) {
+            if((snake_X_Coordinates[0] == snake_X_Coordinates[i]) && (snake_Y_Coordinates[0] == snake_Y_Coordinates[i])) {
                 gameIsRunning = false;
-                break;
+                return;
             }
         }
+
         if(snake_X_Coordinates[0] < 0) {
             gameIsRunning = false;
         }
-        if(snake_X_Coordinates[0] > CAPTCHASnakeGame.GAME_WIDTH  - BLOCK_LENGTH) {
+        if(snake_X_Coordinates[0] > CAPTCHASnakeGame.GAME_WIDTH / 2 - BLOCK_LENGTH) {
             gameIsRunning = false;
         }
         if(snake_Y_Coordinates[0] < 0) {
             gameIsRunning = false;
         }
-        if(snake_Y_Coordinates[0] > CAPTCHASnakeGame.GAME_HEIGHT  - BLOCK_LENGTH) {
+        if(snake_Y_Coordinates[0] > CAPTCHASnakeGame.GAME_HEIGHT - BLOCK_LENGTH) {
             gameIsRunning = false;
         }
         if(!gameIsRunning) {
-            timer.stop();
         }
     }
 
     private void checkTime(){
+
         if (elapsedTimeMilliseconds >= TIME_LIMIT*1000){
             gameIsRunning = false;
         }
