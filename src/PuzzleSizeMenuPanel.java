@@ -21,25 +21,21 @@ public class PuzzleSizeMenuPanel extends JPanel {
         add(messageLabel);
 
         JButton buttonFive = new JButton("Five");
-        buttonFive.setFocusable(false);
         buttonFive.setBackground(new Color(54, 103, 156));
         buttonFive.setForeground(Color.WHITE);
         add(buttonFive);
 
         JButton buttonSix = new JButton("Six");
-        buttonSix.setFocusable(false);
         buttonSix.setBackground(new Color(54, 103, 156));
         buttonSix.setForeground(Color.WHITE);
         add(buttonSix);
 
         JButton buttonSeven = new JButton("Seven");
-        buttonSeven.setFocusable(false);
         buttonSeven.setBackground(new Color(54, 103, 156));
         buttonSeven.setForeground(Color.WHITE);
         add(buttonSeven);
 
         JButton buttonEight = new JButton("Eight");
-        buttonEight.setFocusable(false);
         buttonEight.setBackground(new Color(54, 103, 156));
         buttonEight.setForeground(Color.WHITE);
         add(buttonEight);

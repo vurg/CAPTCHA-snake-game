@@ -18,6 +18,8 @@ import java.awt.event.KeyEvent;
     @Override
     public void keyPressed(KeyEvent e) {
 
+        System.out.println("triggered");
+
         switch(e.getKeyCode()) {
 
             case KeyEvent.VK_LEFT:

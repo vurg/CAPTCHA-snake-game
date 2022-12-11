@@ -69,6 +69,7 @@ import java.awt.event.ActionListener;
         type_CAPTCHA_Button = new JButton("Type CAPTCHA");
         exitButton = new JButton("Exit");
 
+        setFocusable(true);
         setLayout(null);
 
         startGame();

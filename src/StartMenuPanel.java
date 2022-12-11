@@ -20,7 +20,6 @@ class StartMenuPanel extends JPanel {
         this.add(startMessageLabel);
 
         JButton startGameButton= new JButton("Start Game");
-        startGameButton.setFocusable(false);
         startGameButton.setFont(new Font("Comic Sans", Font.PLAIN, 12));
         startGameButton.setBackground(new Color(54, 103, 156));
         startGameButton.setForeground(Color.WHITE);
@@ -37,7 +36,6 @@ class StartMenuPanel extends JPanel {
 
 
         JButton customizeGameButton = new JButton("Settings");
-        customizeGameButton.setFocusable(false);
         customizeGameButton.setFont(new Font("Comic Sans", Font.PLAIN, 12));
         customizeGameButton.setBackground(new Color(54, 103, 156));
         customizeGameButton.setForeground(Color.WHITE);
