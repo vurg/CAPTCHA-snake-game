@@ -55,7 +55,7 @@ import java.awt.event.ActionListener;
         // add panel to frame
         this.add(p);
 
-        for (int i=0; i<my_CAPTCHA_Puzzle.getMy_CAPTCHA_ImageArrayList().size(); i++){
+        for (int i=0; i<my_CAPTCHA_Puzzle.getMy_CAPTCHA_ArrayListImage().size(); i++){
             JLabel myImgLabel = new JLabel();
             myImgLabel.setIcon(new ImageIcon(my_CAPTCHA_Puzzle.getFilePaths().get(i)));
             p.add(myImgLabel);
