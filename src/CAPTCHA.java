@@ -66,6 +66,8 @@ import java.util.Random;
             my_CAPTCHA_PuzzleArrayListImage.add(new ImageIcon("CAPTCHA/" + filePathModifier + "/" + my_CAPTCHA_PuzzleArrayListString.get(i) + ".png").getImage());
             //filePaths is used to store the filePaths in the directory
             filePaths.add("CAPTCHA/" + filePathModifier + "/" + my_CAPTCHA_PuzzleArrayListString.get(i) + ".png");
+
+            System.out.println(my_CAPTCHA_PuzzleArrayListImage.get(i));
         }
     }
 
