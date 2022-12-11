@@ -63,7 +63,7 @@ import java.awt.event.ActionListener;
         addKeyListener(keyboardControls);
         myCaptchaPuzzle = new CAPTCHA();
         myCaptchaPuzzle.generatePuzzle();
-        myCAPTCHAPuzzleImageArrayList = myCaptchaPuzzle.getMyCAPTCHAImageArrayList();
+        myCAPTCHAPuzzleImageArrayList = myCaptchaPuzzle.getMy_CAPTCHA_ArrayListImage();
         mainMenuButton = new JButton("Main Menu");
         retryButton = new JButton("Retry");
         type_CAPTCHA_Button = new JButton("Type CAPTCHA");

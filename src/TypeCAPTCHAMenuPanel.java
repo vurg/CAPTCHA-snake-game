@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 
  class TypeCAPTCHAMenuPanel extends JPanel{
 
-    private CAPTCHA myCAPTCHAPuzzle;
+    private CAPTCHA my_CAPTCHA_Puzzle;
 
     TypeCAPTCHAMenuPanel(CAPTCHA currentPuzzle){
-        this.myCAPTCHAPuzzle = currentPuzzle;
+        this.my_CAPTCHA_Puzzle = currentPuzzle;
         StartTyping();
     }
 
@@ -29,7 +29,7 @@ import java.awt.event.ActionListener;
                 String s = e.getActionCommand();
                 if (s.equals("submit")) {
                     // set the text of the label to the text of the field
-                    if(t.getText().equals(myCAPTCHAPuzzle.getMyCAPTCHAPuzzleString())){
+                    if(t.getText().equals(my_CAPTCHA_Puzzle.getMy_CAPTCHA_PuzzleString())){
                         l.setText("Congratulations! You are not a robot. Type Exit to leave the program.");
                         t.setText("");
                     }else if(t.getText().equals("Exit") || t.getText().equals("exit")) {
@@ -55,9 +55,9 @@ import java.awt.event.ActionListener;
         // add panel to frame
         this.add(p);
 
-        for (int i=0; i<myCAPTCHAPuzzle.getMyCAPTCHAImageArrayList().size(); i++){
+        for (int i=0; i<my_CAPTCHA_Puzzle.getMy_CAPTCHA_ImageArrayList().size(); i++){
             JLabel myImgLabel = new JLabel();
-            myImgLabel.setIcon(new ImageIcon(myCAPTCHAPuzzle.getFilePaths().get(i)));
+            myImgLabel.setIcon(new ImageIcon(my_CAPTCHA_Puzzle.getFilePaths().get(i)));
             p.add(myImgLabel);
         }
         this.setVisible(true);

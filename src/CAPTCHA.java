@@ -70,13 +70,13 @@ import java.util.Random;
     }
 
     //getters
-    public String getMyCAPTCHAPuzzleString(){
+    public String getMy_CAPTCHA_PuzzleString(){
         return this.my_CAPTCHA_PuzzleString;
     }
-    public ArrayList<String> getMyCAPTCHAPuzzleStringArrayList(){
+    public ArrayList<String> getMy_CAPTCHA_PuzzleStringArrayList(){
         return this.my_CAPTCHA_PuzzleArrayListString;
     }
-    public ArrayList<Image> getMyCAPTCHAImageArrayList(){
+    public ArrayList<Image> getMy_CAPTCHA_ArrayListImage(){
         return this.my_CAPTCHA_PuzzleArrayListImage;
     }
     public ArrayList<String> getFilePaths(){
