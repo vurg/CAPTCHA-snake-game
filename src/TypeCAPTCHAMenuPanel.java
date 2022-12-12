@@ -11,12 +11,12 @@ import java.awt.event.ActionListener;
     TypeCAPTCHAMenuPanel(CAPTCHA my_CAPTCHA_Puzzle){
         
         this.my_CAPTCHA_Puzzle = my_CAPTCHA_Puzzle;
-        StartTyping();
+        startTyping();
         setFocusable(true);
         setLayout(null);
     }
 
-    public void StartTyping(){
+    public void startTyping(){
 
         for (int i=0; i<my_CAPTCHA_Puzzle.getMy_CAPTCHA_ArrayListImage().size(); i++){
             JLabel myImgLabel = new JLabel();

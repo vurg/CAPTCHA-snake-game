@@ -314,9 +314,9 @@ import java.awt.event.ActionListener;
         if (gameIsRunning)
         {
             move();
-            checkCollisions();
+            check_CAPTCHA_SymbolCollison();
+            checkWallOrSelfCollision();
             checkTime();
-            checkLetter();
         }
         repaint();
     }
@@ -343,7 +343,7 @@ import java.awt.event.ActionListener;
         }
     }
 
-    private void checkLetter(){
+    private void check_CAPTCHA_SymbolCollison(){
 
         if (nrOf_CAPTCHA_Taken == my_CAPTCHA_PuzzleArrayListImage.size()){
            
@@ -369,7 +369,7 @@ import java.awt.event.ActionListener;
         }
     }
 
-    private void checkCollisions(){
+    private void checkWallOrSelfCollision(){
 
         for(int i = nrOfSnakeBodyParts;i>0;i--) {
             if((snake_X_Coordinates[0] == snake_X_Coordinates[i]) && (snake_Y_Coordinates[0] == snake_Y_Coordinates[i])) {
