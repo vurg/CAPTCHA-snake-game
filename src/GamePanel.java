@@ -2,14 +2,18 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.SwingUtilities;
 
 import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.Window;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -36,10 +40,7 @@ import java.awt.event.ActionListener;
     private ArrayList<Image> my_CAPTCHA_PuzzleArrayListImage;
 
     private final int TIME_LIMIT = 60;
-
-    // private boolean isRobot;
     private int elapsedTimeMilliseconds;
-    private int score;
 
     private JButton mainMenuButton;
     private JButton retryButton;
@@ -98,7 +99,7 @@ import java.awt.event.ActionListener;
                 noSameCoordinates = true;
 
                 CAPTCHA_Image_X_Coordinate = random.nextInt((CAPTCHASnakeGame.GAME_WIDTH / 2) / BLOCK_LENGTH) * BLOCK_LENGTH;
-                CAPTCHA_Image_Y_Coordinate = random.nextInt(1, CAPTCHASnakeGame.GAME_HEIGHT / BLOCK_LENGTH) * BLOCK_LENGTH; //prev 1 row
+                CAPTCHA_Image_Y_Coordinate = random.nextInt(1, CAPTCHASnakeGame.GAME_HEIGHT / BLOCK_LENGTH) * BLOCK_LENGTH;
 
 
 
@@ -126,11 +127,13 @@ import java.awt.event.ActionListener;
 
         super.paintComponent(g);
 
-        if (gameIsRunning == false && score == my_CAPTCHA_PuzzleArrayListImage.size()) {
+        if (gameIsRunning == false && nrOf_CAPTCHA_Taken == my_CAPTCHA_PuzzleArrayListImage.size()){
+
             timer.stop();
             drawVerificationSuccessScreen(g);
 
         } else if (gameIsRunning == false) {
+
             timer.stop();
             drawVerificationFailureScreen(g);
 
@@ -138,7 +141,7 @@ import java.awt.event.ActionListener;
 
             drawRunningGame(g);
 
-        } //check
+        }
 
     }
 
@@ -170,7 +173,7 @@ import java.awt.event.ActionListener;
     
             }
 
-            for (int i = 0; i < my_CAPTCHA_PuzzleArrayListImage.size(); i++) {
+            for (int i = nrOf_CAPTCHA_Taken; i < my_CAPTCHA_PuzzleArrayListImage.size(); i++) {
 
                 g.drawImage(my_CAPTCHA_PuzzleArrayListImage.get(i), my_CAPTCHA_Puzzle_X_Coordinates.get(i), my_CAPTCHA_Puzzle_Y_Coordinates.get(i), null);
     
@@ -181,7 +184,7 @@ import java.awt.event.ActionListener;
             g.setFont(new Font("Courier", Font.ITALIC ,20));
             fontMetrics = getFontMetrics(g.getFont());
 
-            g.drawString("Collect The Following CAPTCHA Symbols:", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Collect The Following CAPTCHA Symbols:") / 2), 100); //check
+            g.drawString("Collect The Following CAPTCHA Symbols:", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Collect The Following CAPTCHA Symbols:") / 2), 100);
 
             for (int i = nrOf_CAPTCHA_Taken; i < my_CAPTCHA_PuzzleArrayListImage.size(); i++) {
 
@@ -189,11 +192,11 @@ import java.awt.event.ActionListener;
                 
             }
 
-            g.drawString("Collected:", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Collected:") / 2), 300); //check
+            g.drawString("Collected:", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Collected:") / 2), 300);
 
             if (nrOf_CAPTCHA_Taken == 0) {
 
-                g.drawString("None", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("None") / 2) + 150, 300); // check
+                g.drawString("None", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("None") / 2) + 150, 300);
 
             } else {
 
@@ -205,7 +208,7 @@ import java.awt.event.ActionListener;
 
             }
 
-            g.drawString("Time Remaining: " + (TIME_LIMIT - (elapsedTimeMilliseconds / 1000)) + "s", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Time Remaining: " + (TIME_LIMIT - (elapsedTimeMilliseconds / 1000)) + "s") / 2), 500); //check
+            g.drawString("Time Remaining: " + (TIME_LIMIT - (elapsedTimeMilliseconds / 1000)) + "s", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Time Remaining: " + (TIME_LIMIT - (elapsedTimeMilliseconds / 1000)) + "s") / 2), 500);
 
     }
 
@@ -213,13 +216,9 @@ import java.awt.event.ActionListener;
 
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, CAPTCHASnakeGame.GAME_WIDTH, CAPTCHASnakeGame.GAME_HEIGHT);
-
-        for (int i = 0; i < my_CAPTCHA_PuzzleArrayListImage.size(); i++){
-            g.drawImage(my_CAPTCHA_PuzzleArrayListImage.get(i), (CAPTCHASnakeGame.GAME_WIDTH / 2) - (my_CAPTCHA_PuzzleArrayListImage.size() / 2) + (35 * i), 100, null);
-        }
         
         g.setColor(Color.BLUE);
-        // fontMetrics = getFontMetrics(g.getFont());
+        fontMetrics = getFontMetrics(g.getFont());
 
         g.drawString("Verification Complete", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Verification Complete") / 2), 200);
 
@@ -229,14 +228,22 @@ import java.awt.event.ActionListener;
 
         g.drawString("Game Size: " + my_CAPTCHA_PuzzleArrayListImage.size() + " Symbols", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Game Size: " + my_CAPTCHA_PuzzleArrayListImage.size() + " Symbols") / 2), 500);
 
-        exitButton.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - 50, 600, 100, 50);
+        for (int i = 0; i < my_CAPTCHA_PuzzleArrayListImage.size(); i++){
+            g.drawImage(my_CAPTCHA_PuzzleArrayListImage.get(i), (CAPTCHASnakeGame.GAME_WIDTH / 2) - (my_CAPTCHA_PuzzleArrayListImage.size() * 35 / 2) + (35 * i), 600, null);
+        }
+
+        exitButton.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - 50, 700, 100, 50);
         add(exitButton);
 
         exitButton.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e){
-                //check
+                
+                //closes window
+                JComponent comp = (JComponent) e.getSource();
+                Window win = SwingUtilities.getWindowAncestor(comp);
+                win.dispose();
             }
 
         });
@@ -246,6 +253,7 @@ import java.awt.event.ActionListener;
     private void drawVerificationFailureScreen(Graphics g){
 
         g.setColor(Color.RED);
+        fontMetrics = getFontMetrics(g.getFont());
 
         g.drawString("Game Over", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Game Over") / 2), 100);
 
@@ -261,8 +269,6 @@ import java.awt.event.ActionListener;
         add(retryButton);
         add(type_CAPTCHA_Button);
         
-
-
         mainMenuButton.addActionListener(new ActionListener(){
             
             @Override
@@ -270,8 +276,6 @@ import java.awt.event.ActionListener;
 
                 gameFrame.closeFrame();
                 new StartMenuFrame();
-
-
             }
 
         });
@@ -284,8 +288,6 @@ import java.awt.event.ActionListener;
 
                 gameFrame.closeFrame();
                 new GameFrame();
-
-
             }
 
         });
@@ -298,8 +300,6 @@ import java.awt.event.ActionListener;
 
                 gameFrame.closeFrame();
                 new TypeCAPTCHAMenuFrame(my_CAPTCHA_Puzzle);
-
-
             }
 
         });
@@ -327,7 +327,6 @@ import java.awt.event.ActionListener;
             snake_Y_Coordinates[i] = snake_Y_Coordinates[i-1];
         }
 
-        System.out.println(keyboardControls.getSnakeMovingDirection());
         switch(keyboardControls.getSnakeMovingDirection()) {
             case 'L':
             snake_X_Coordinates[0] = snake_X_Coordinates[0] - BLOCK_LENGTH;
@@ -346,16 +345,27 @@ import java.awt.event.ActionListener;
 
     private void checkLetter(){
 
-        for (int i=score; i<my_CAPTCHA_PuzzleArrayListImage.size(); i++){
-
-            if((snake_X_Coordinates[0] == my_CAPTCHA_Puzzle_X_Coordinates.get(score)) && (snake_Y_Coordinates[0] == my_CAPTCHA_Puzzle_Y_Coordinates.get(score))) {
-                nrOfSnakeBodyParts++;
-                score++;
-            }
-        }
-
-        if (score == my_CAPTCHA_PuzzleArrayListImage.size()){
+        if (nrOf_CAPTCHA_Taken == my_CAPTCHA_PuzzleArrayListImage.size()){
+           
             gameIsRunning = false;
+            return;
+
+        } else if ((snake_X_Coordinates[0] == my_CAPTCHA_Puzzle_X_Coordinates.get(nrOf_CAPTCHA_Taken)) && (snake_Y_Coordinates[0] == my_CAPTCHA_Puzzle_Y_Coordinates.get(nrOf_CAPTCHA_Taken)))  {
+            
+            nrOfSnakeBodyParts++;
+            nrOf_CAPTCHA_Taken++;
+            return;
+
+        } else {
+
+            for (int i = my_CAPTCHA_PuzzleArrayListImage.size() - 1; i > 0; i--){
+
+                if ((snake_X_Coordinates[0] == my_CAPTCHA_Puzzle_X_Coordinates.get(i)) && (snake_Y_Coordinates[0] == my_CAPTCHA_Puzzle_Y_Coordinates.get(i))){
+                    gameIsRunning = false;
+                    return;
+                }
+            }
+
         }
     }
 

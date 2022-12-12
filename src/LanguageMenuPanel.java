@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 
 public class LanguageMenuPanel extends JPanel {
 
-    public static boolean includeSwedishLetters = false;
     
     LanguageMenuPanel (LanguageMenuFrame languageMenuFrame) {
 
@@ -35,8 +34,7 @@ public class LanguageMenuPanel extends JPanel {
 
         swedishLanguageButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                includeSwedishLetters = true;
-                //System.out.println("Language: Swedish. Swedish boolean: " + StartMenu.includeSwedishLetters);
+                CAPTCHASnakeGame.setIncludeSwedishLetters(true);
                 languageMenuFrame.closeFrame();
                 new PuzzleSizeMenuFrame();
             }
@@ -44,18 +42,10 @@ public class LanguageMenuPanel extends JPanel {
 
         englishLanguageButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                includeSwedishLetters = false;
-                //System.out.println("Language: English. Swedish boolean: " + StartMenu.includeSwedishLetters);
+                CAPTCHASnakeGame.setIncludeSwedishLetters(false);
                 languageMenuFrame.closeFrame();
                 new PuzzleSizeMenuFrame();
             }
         });
-
     }
-
-    public static boolean getIncludeSwedishLetters() {
-        return includeSwedishLetters;
-    }
-
-
 }

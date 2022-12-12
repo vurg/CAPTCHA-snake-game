@@ -6,9 +6,9 @@ import java.awt.Dimension;
 
     GameFrame () {
         add(new GamePanel(this));
-        setTitle("CAPTCHA Snake Game");
+        setTitle("CAPTCHA Snake Game For User Verification");
         setSize(new Dimension(CAPTCHASnakeGame.GAME_WIDTH, CAPTCHASnakeGame.GAME_HEIGHT));
-        setResizable(false); //check
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);

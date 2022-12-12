@@ -11,8 +11,6 @@ import java.awt.event.ActionEvent;
 
 public class PuzzleSizeMenuPanel extends JPanel {
     
-    private static int numOf_CAPTCHA_Symbols = 6;
-
     PuzzleSizeMenuPanel (PuzzleSizeMenuFrame puzzleSizeMenuFrame) {
 
         JLabel messageLabel = new JLabel("Please select size of CAPTCHA puzzle:");
@@ -42,7 +40,7 @@ public class PuzzleSizeMenuPanel extends JPanel {
 
         buttonFive.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                numOf_CAPTCHA_Symbols = 5;
+                CAPTCHASnakeGame.setNrOf_CAPTCHA_Symbols(5);
                 puzzleSizeMenuFrame.closeFrame();
                 new StartMenuFrame();
             }
@@ -50,7 +48,7 @@ public class PuzzleSizeMenuPanel extends JPanel {
 
         buttonSix.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                numOf_CAPTCHA_Symbols = 6;
+                CAPTCHASnakeGame.setNrOf_CAPTCHA_Symbols(6);
                 puzzleSizeMenuFrame.closeFrame();
                 new StartMenuFrame();
             }
@@ -58,7 +56,7 @@ public class PuzzleSizeMenuPanel extends JPanel {
 
         buttonSeven.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                numOf_CAPTCHA_Symbols = 7;
+                CAPTCHASnakeGame.setNrOf_CAPTCHA_Symbols(7);
                 puzzleSizeMenuFrame.closeFrame();
                 new StartMenuFrame();
             }
@@ -66,15 +64,10 @@ public class PuzzleSizeMenuPanel extends JPanel {
 
         buttonEight.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                numOf_CAPTCHA_Symbols = 8;
+                CAPTCHASnakeGame.setNrOf_CAPTCHA_Symbols(8);
                 puzzleSizeMenuFrame.closeFrame();
                 new StartMenuFrame();
             }
         });
     }
-
-    public static int getNrOf_CAPTCHA_Symbols(){
-        return numOf_CAPTCHA_Symbols;
-    }
-
 }

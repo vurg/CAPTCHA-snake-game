@@ -30,12 +30,12 @@ import java.util.Random;
         String alphabet = UPPER_CASE + LOWER_CASE + NUMBERS;
 
         //if user wants to include Swedish letters, we append the alphabet
-        if (LanguageMenuPanel.getIncludeSwedishLetters()){
+        if (CAPTCHASnakeGame.getIncludeSwedishLetters()){
             alphabet = alphabet + SWEDISH_UPPER_CASE + SWEDISH_LOWER_CASE;
         }
 
         // the for loop generates a CAPTCHA puzzle of size specified by user
-        for (int i=0; i < PuzzleSizeMenuPanel.getNrOf_CAPTCHA_Symbols(); i++){
+        for (int i=0; i < CAPTCHASnakeGame.getNrOf_CAPTCHA_Symbols(); i++){
             while(my_CAPTCHA_PuzzleArrayListString.size()<=i){
                 //generate random character from specified alphabet incl. uppercase letters, lowercase letters, numbers
                 int randomInt = random.nextInt(0, alphabet.length()-1);
