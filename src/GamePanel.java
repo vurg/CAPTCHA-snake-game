@@ -149,8 +149,6 @@ import java.awt.event.ActionListener;
     private void drawRunningGame(Graphics g){
 
         //left side of panel
-        g.setColor(Color.BLACK);
-        g.fillRect(0,0, CAPTCHASnakeGame.GAME_WIDTH / 2, CAPTCHASnakeGame.GAME_HEIGHT);
 
         Image img = new ImageIcon("wallpapers/wallp2.jpg").getImage();
 
@@ -160,8 +158,8 @@ import java.awt.event.ActionListener;
 
                 if (i == 0){
                   
-                    g.setColor(new Color(188, 184, 138));
-                    g.fillRect(snake_X_Coordinates[i], snake_Y_Coordinates[i], BLOCK_LENGTH, BLOCK_LENGTH);
+                    g.setColor(new Color(111, 78, 55));
+                    g.fillOval(snake_X_Coordinates[i], snake_Y_Coordinates[i], BLOCK_LENGTH, BLOCK_LENGTH);
     
                     if (snake_X_Coordinates[i] == snake_X_Coordinates[i+1] && snake_Y_Coordinates[i] == snake_Y_Coordinates[i+1]){
     
@@ -228,22 +226,29 @@ import java.awt.event.ActionListener;
 
         g.drawImage(img, 0, 0, null);
         
-        g.setColor(Color.BLUE);
+        g.setFont(new Font("Courier", Font.BOLD, 46));
+        g.setColor(new Color(0, 20, 90));
         fontMetrics = getFontMetrics(g.getFont());
 
         g.drawString("Verification Complete", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Verification Complete") / 2), 200);
 
         g.drawString("You Are Not A Robot!", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("You Are Not A Robot!") / 2), 300);
 
+        g.setFont(new Font("Courier", Font.BOLD, 36));
+        g.setColor(new Color(230,230,0));
+        fontMetrics = getFontMetrics(g.getFont());
+
         g.drawString("Time Elapsed: " + (elapsedTimeMilliseconds / 1000) + "s", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Time Elapsed: " + (elapsedTimeMilliseconds / 1000) + "s") / 2), 400);
 
-        g.drawString("Game Size: " + my_CAPTCHA_PuzzleArrayListImage.size() + " Symbols", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Game Size: " + my_CAPTCHA_PuzzleArrayListImage.size() + " Symbols") / 2), 500);
+        g.drawString("Game Size: " + my_CAPTCHA_PuzzleArrayListImage.size() + " Symbols", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Game Size: " + my_CAPTCHA_PuzzleArrayListImage.size() + " Symbols") / 2), 480);
 
         for (int i = 0; i < my_CAPTCHA_PuzzleArrayListImage.size(); i++){
-            g.drawImage(my_CAPTCHA_PuzzleArrayListImage.get(i), (CAPTCHASnakeGame.GAME_WIDTH / 2) - (my_CAPTCHA_PuzzleArrayListImage.size() * 35 / 2) + (35 * i), 600, null);
+            g.drawImage(my_CAPTCHA_PuzzleArrayListImage.get(i), (CAPTCHASnakeGame.GAME_WIDTH / 2) - (my_CAPTCHA_PuzzleArrayListImage.size() * 35 / 2) + (35 * i), 530, null);
         }
 
-        exitButton.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - 50, 700, 100, 50);
+        exitButton.setForeground(Color.BLACK);
+        exitButton.setBackground(new Color(32,178,170));
+        exitButton.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - 50, 650, 100, 50);
         add(exitButton);
 
         exitButton.addActionListener(new ActionListener(){
@@ -378,8 +383,11 @@ import java.awt.event.ActionListener;
 
         } else if ((snake_X_Coordinates[0] == my_CAPTCHA_Puzzle_X_Coordinates.get(nrOf_CAPTCHA_Taken)) && (snake_Y_Coordinates[0] == my_CAPTCHA_Puzzle_Y_Coordinates.get(nrOf_CAPTCHA_Taken)))  {
             
+            my_CAPTCHA_Puzzle_X_Coordinates.set(nrOf_CAPTCHA_Taken, -1);
+            my_CAPTCHA_Puzzle_Y_Coordinates.set(nrOf_CAPTCHA_Taken, -1);
             nrOfSnakeBodyParts++;
             nrOf_CAPTCHA_Taken++;
+
             return;
 
         } else {

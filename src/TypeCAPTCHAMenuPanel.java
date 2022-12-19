@@ -21,15 +21,18 @@ import java.awt.event.ActionListener;
         for (int i=0; i<my_CAPTCHA_Puzzle.getMy_CAPTCHA_ArrayListImage().size(); i++){
             JLabel myImgLabel = new JLabel();
             myImgLabel.setIcon(new ImageIcon(my_CAPTCHA_Puzzle.getFilePaths().get(i)));
-            myImgLabel.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - ((CAPTCHASnakeGame.getNrOf_CAPTCHA_Symbols() * 35) / 2) + (i * 35), 100, 35, 35);
+            myImgLabel.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - ((CAPTCHASnakeGame.getNrOf_CAPTCHA_Symbols() * 35) / 2) + (i * 35), 150, 35, 35);
             add(myImgLabel);
         }
 
         // create a label to display text
-        JLabel l = new JLabel("Type CAPTCHA:");
+        JLabel l = new JLabel("Type the CAPTCHA Above:", SwingConstants.CENTER);
+
+        l.setFont(new Font("Calibri", Font.BOLD, 16));
+        l.setForeground(new Color(150, 180, 150));
 
         // create a new button
-        JButton b = new JButton("submit");
+        JButton b = new JButton("Submit");
 
         // create a object of the text class
         JTextField t = new JTextField(16);
@@ -38,7 +41,7 @@ import java.awt.event.ActionListener;
         b.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 String s = e.getActionCommand();
-                if (s.equals("submit")) {
+                if (s.equals("Submit")) {
                     // set the text of the label to the text of the field
                     if(t.getText().equals(my_CAPTCHA_Puzzle.getMy_CAPTCHA_PuzzleString())){
                         l.setText("Congratulations! You are not a robot. Type Exit to leave the program.");
@@ -55,7 +58,7 @@ import java.awt.event.ActionListener;
             }
         });
 
-        l.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - (400 / 2), 150, 400, 100);
+        l.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - (500 / 2), 165, 500, 100);
         t.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - (150 / 2), 250, 150, 30);
         b.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - (100 / 2), 300, 100, 30);
 
@@ -65,4 +68,14 @@ import java.awt.event.ActionListener;
         this.add(b);
 
     }
+
+    @Override
+    public void paintComponent (Graphics g){
+        super.paintComponent(g);
+
+        Image img = new ImageIcon("wallpapers/wallp6.jpg").getImage();
+
+        g.drawImage(img, 0, 0, null);
+        
+    }  
 }
