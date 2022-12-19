@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -151,11 +152,15 @@ import java.awt.event.ActionListener;
         g.setColor(Color.BLACK);
         g.fillRect(0,0, CAPTCHASnakeGame.GAME_WIDTH / 2, CAPTCHASnakeGame.GAME_HEIGHT);
 
+        Image img = new ImageIcon("wallpapers/wallp2.jpg").getImage();
+
+        g.drawImage(img, 0, 0, null);
+
             for (int i = 0; i < nrOfSnakeBodyParts; i++) {
 
                 if (i == 0){
                   
-                    g.setColor(Color.RED);
+                    g.setColor(new Color(188, 184, 138));
                     g.fillRect(snake_X_Coordinates[i], snake_Y_Coordinates[i], BLOCK_LENGTH, BLOCK_LENGTH);
     
                     if (snake_X_Coordinates[i] == snake_X_Coordinates[i+1] && snake_Y_Coordinates[i] == snake_Y_Coordinates[i+1]){
@@ -166,7 +171,7 @@ import java.awt.event.ActionListener;
     
                 } else {
     
-                    g.setColor(Color.GREEN);
+                    g.setColor(new Color(80, 125, 42));
                     g.fillRect(snake_X_Coordinates[i], snake_Y_Coordinates[i], BLOCK_LENGTH, BLOCK_LENGTH);
     
                 }
@@ -180,42 +185,48 @@ import java.awt.event.ActionListener;
             }
 
             //right side of panel
-            g.setColor(Color.BLACK);
-            g.setFont(new Font("Courier", Font.ITALIC ,20));
+
+            Image img2 = new ImageIcon("wallpapers/wallp3.jpg").getImage();
+
+            g.drawImage(img2, 840, 0, null);
+
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Courier", Font.BOLD, 28));
             fontMetrics = getFontMetrics(g.getFont());
 
-            g.drawString("Collect The Following CAPTCHA Symbols:", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Collect The Following CAPTCHA Symbols:") / 2), 100);
+            g.drawString("Collect The Following CAPTCHA Symbols:", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Collect The Following CAPTCHA Symbols:") / 2), 230);
 
             for (int i = nrOf_CAPTCHA_Taken; i < my_CAPTCHA_PuzzleArrayListImage.size(); i++) {
 
-                g.drawImage(my_CAPTCHA_PuzzleArrayListImage.get(i), (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (35 * my_CAPTCHA_PuzzleArrayListImage.size() / 2) + (35 * i), 200, null);
+                g.drawImage(my_CAPTCHA_PuzzleArrayListImage.get(i), (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (35 * my_CAPTCHA_PuzzleArrayListImage.size() / 2) + (35 * i), 260, null);
                 
             }
 
-            g.drawString("Collected:", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Collected:") / 2), 300);
+            g.drawString("Collected:", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Collected:") / 2), 400);
 
             if (nrOf_CAPTCHA_Taken == 0) {
 
-                g.drawString("None", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("None") / 2) + 150, 300);
+                g.drawString("None", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("None") / 2), 440);
 
             } else {
 
                 for (int i = 0; i < nrOf_CAPTCHA_Taken; i++) {
 
-                    g.drawImage(my_CAPTCHA_PuzzleArrayListImage.get(i), (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (35 * my_CAPTCHA_PuzzleArrayListImage.size() / 2) + (35 * i), 350, null);
+                    g.drawImage(my_CAPTCHA_PuzzleArrayListImage.get(i), (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (35 * my_CAPTCHA_PuzzleArrayListImage.size() / 2) + (35 * i), 440, null);
     
                 }
 
             }
 
-            g.drawString("Time Remaining: " + (TIME_LIMIT - (elapsedTimeMilliseconds / 1000)) + "s", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Time Remaining: " + (TIME_LIMIT - (elapsedTimeMilliseconds / 1000)) + "s") / 2), 500);
+            g.drawString("Time Remaining: " + (TIME_LIMIT - (elapsedTimeMilliseconds / 1000)) + "s", (CAPTCHASnakeGame.GAME_WIDTH - (CAPTCHASnakeGame.GAME_WIDTH / 2 / 2)) - (fontMetrics.stringWidth("Time Remaining: " + (TIME_LIMIT - (elapsedTimeMilliseconds / 1000)) + "s") / 2), 550);
 
     }
 
     private void drawVerificationSuccessScreen(Graphics g) {
 
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, CAPTCHASnakeGame.GAME_WIDTH, CAPTCHASnakeGame.GAME_HEIGHT);
+        Image img = new ImageIcon("wallpapers/wallp4.jpg").getImage();
+
+        g.drawImage(img, 0, 0, null);
         
         g.setColor(Color.BLUE);
         fontMetrics = getFontMetrics(g.getFont());
@@ -252,18 +263,33 @@ import java.awt.event.ActionListener;
 
     private void drawVerificationFailureScreen(Graphics g){
 
+        Image img = new ImageIcon("wallpapers/wallp5.jpg").getImage();
+
+        g.drawImage(img, 0, 0, null);
+
         g.setColor(Color.RED);
+        g.setFont(new Font("Courier", Font.BOLD ,48));
         fontMetrics = getFontMetrics(g.getFont());
 
-        g.drawString("Game Over", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Game Over") / 2), 100);
+        g.drawString("Game Over", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Game Over") / 2), 270);
 
         g.setColor(Color.BLACK);
+        g.setFont(new Font("Courier", Font.BOLD ,30));
+        fontMetrics = getFontMetrics(g.getFont());
 
-        g.drawString("Verification Failed", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Verification Failed") / 2), 200);
+        g.drawString("Verification Failed", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Verification Failed") / 2), 340);
 
-        mainMenuButton.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - (100 / 2) - 120, 600, 100, 50);
-        retryButton.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - (100 / 2), 600, 100, 50);
-        type_CAPTCHA_Button.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - (100 / 2) + 120, 600, 100, 50);
+        retryButton.setForeground(Color.WHITE);
+        type_CAPTCHA_Button.setForeground(Color.WHITE);
+        mainMenuButton.setForeground(Color.WHITE);
+
+        retryButton.setBackground(new Color(150, 200, 162));
+        type_CAPTCHA_Button.setBackground(new Color(0, 112, 60));
+        mainMenuButton.setBackground(new Color(0, 66, 37));
+
+        retryButton.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - (100 / 2), 420, 100, 50);
+        type_CAPTCHA_Button.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - (150 / 2), 500, 150, 50);
+        mainMenuButton.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - (100 / 2), 580, 100, 50);
 
         add(mainMenuButton);
         add(retryButton);

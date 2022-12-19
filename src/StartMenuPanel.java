@@ -24,7 +24,7 @@ class StartMenuPanel extends JPanel {
         JLabel startMessageLabel = new JLabel("Welcome To CAPTCHA Snake", SwingConstants.CENTER);
         System.out.println(Label.WIDTH);
         startMessageLabel.setFont(new Font("Comic Sans", Font.BOLD, 24));
-        startMessageLabel.setForeground(new Color(230, 245, 230));
+        startMessageLabel.setForeground(new Color(0, 30, 0));
         startMessageLabel.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - (400 / 2), 160, 400, 100);
         this.add(startMessageLabel);
 
@@ -40,7 +40,7 @@ class StartMenuPanel extends JPanel {
                 new GameFrame();
             }
         });
-        startGameButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - 100, 300, 100, 50);
+        startGameButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - 110, 260, 100, 50);
         this.add(startGameButton);
 
 
@@ -57,7 +57,7 @@ class StartMenuPanel extends JPanel {
             }
         });
 
-        customizeGameButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2), 300, 100, 50);
+        customizeGameButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) + 10, 260, 100, 50);
         this.add(customizeGameButton);
 
         JLabel label = new JLabel("Latest game size");
@@ -73,7 +73,7 @@ class StartMenuPanel extends JPanel {
     public void paintComponent (Graphics g){
         super.paintComponent(g);
 
-        Image img = new ImageIcon("./wallpapers/wallp2.jpg").getImage();
+        Image img = new ImageIcon("wallpapers/wallp1.jpg").getImage();
 
         g.drawImage(img, 0, 0, null);
         

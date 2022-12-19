@@ -22,22 +22,22 @@ public class LanguageMenuPanel extends JPanel {
 
         JLabel welcomeMsg = new JLabel("Please Select Your Alphabet:", SwingConstants.CENTER);
         welcomeMsg.setFont(new Font("Ariel", Font.BOLD, 22));
-        welcomeMsg.setForeground(new Color(220,250,220));
-        welcomeMsg.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - (300 / 2), 150, 300, 100);
+        welcomeMsg.setForeground(new Color(0,30,0));
+        welcomeMsg.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - (300 / 2), 120, 300, 120);
         add(welcomeMsg);
 
         JButton swedishLanguageButton = new JButton("Swedish");
         swedishLanguageButton.setFont(new Font("Ariel", Font.BOLD, 12));
         swedishLanguageButton.setForeground(Color.BLUE);
         swedishLanguageButton.setBackground(Color.yellow);
-        swedishLanguageButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2), (CAPTCHASnakeGame.MENU_HEIGHT / 2) - (60 / 2), 80, 60);
+        swedishLanguageButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) + 10, (CAPTCHASnakeGame.MENU_HEIGHT / 2) - (60 / 2), 80, 40);
         add(swedishLanguageButton);
 
         JButton englishLanguageButton = new JButton("English");
         englishLanguageButton.setFont(new Font("Ariel", Font.BOLD, 12));
         englishLanguageButton.setForeground(Color.red);
         englishLanguageButton.setBackground(Color.BLUE);
-        englishLanguageButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - 80, (CAPTCHASnakeGame.MENU_HEIGHT / 2) - (60 / 2), 80, 60);
+        englishLanguageButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - 90, (CAPTCHASnakeGame.MENU_HEIGHT / 2) - (60 / 2), 80, 40);
         add(englishLanguageButton);
 
         swedishLanguageButton.addActionListener(new ActionListener(){
@@ -61,7 +61,7 @@ public class LanguageMenuPanel extends JPanel {
     public void paintComponent (Graphics g){
         super.paintComponent(g);
 
-        Image img = new ImageIcon("./wallpapers/wallp2.jpg").getImage();
+        Image img = new ImageIcon("wallpapers/wallp1.jpg").getImage();
 
         g.drawImage(img, 0, 0, null);
         
