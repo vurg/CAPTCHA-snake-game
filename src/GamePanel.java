@@ -99,7 +99,7 @@ import java.awt.event.ActionListener;
                 noSameCoordinates = true;
 
                 CAPTCHA_Image_X_Coordinate = random.nextInt((CAPTCHASnakeGame.GAME_WIDTH / 2) / BLOCK_LENGTH) * BLOCK_LENGTH;
-                CAPTCHA_Image_Y_Coordinate = random.nextInt(1, CAPTCHASnakeGame.GAME_HEIGHT / BLOCK_LENGTH) * BLOCK_LENGTH;
+                CAPTCHA_Image_Y_Coordinate = random.nextInt(1, (CAPTCHASnakeGame.GAME_HEIGHT / BLOCK_LENGTH) - 1) * BLOCK_LENGTH;
 
 
 
