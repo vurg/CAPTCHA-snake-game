@@ -22,7 +22,7 @@ public class PuzzleSizeMenuPanel extends JPanel {
         JLabel messageLabel = new JLabel("Please Select Size of CAPTCHA Puzzle:", SwingConstants.CENTER);
         messageLabel.setFont(new Font("Ariel", Font.BOLD, 22));
         messageLabel.setForeground(new Color(0, 30, 0));
-        messageLabel.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - 200, 170, 400, 50);
+        messageLabel.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - 300, 170, 600, 50);
         add(messageLabel);
 
         JButton buttonFive = new JButton("Five");
