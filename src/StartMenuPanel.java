@@ -21,7 +21,7 @@ class StartMenuPanel extends JPanel {
         setLayout(null);
         setVisible(true);
 
-        JLabel startMessageLabel = new JLabel("Welcome To CAPTCHA Snake Game!", SwingConstants.CENTER);
+        JLabel startMessageLabel = new JLabel("Welcome To CAPTCHA Snake Game!");
         startMessageLabel.setFont(new Font("Comic Sans", Font.BOLD, 24));
         startMessageLabel.setForeground(new Color(0, 30, 0));
         startMessageLabel.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - 200, 160, 600, 100);
