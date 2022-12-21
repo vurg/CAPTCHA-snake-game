@@ -22,14 +22,14 @@ class StartMenuPanel extends JPanel {
         setVisible(true);
 
         JLabel startMessageLabel = new JLabel("Welcome To CAPTCHA Snake Game!");
-        startMessageLabel.setFont(new Font("Comic Sans", Font.BOLD, 24));
+        startMessageLabel.setFont(new Font("Ariel", Font.BOLD, 22));
         startMessageLabel.setForeground(new Color(0, 30, 0));
-        startMessageLabel.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - 200, 160, 600, 100);
+        startMessageLabel.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - 200, 170, 400, 50);
         this.add(startMessageLabel);
 
         JButton startGameButton= new JButton("Start Game");
-        startGameButton.setFont(new Font("Comic Sans", Font.PLAIN, 12));
-        startGameButton.setBackground(new Color(60,179,113));
+        startGameButton.setFont(new Font("Ariel", Font.BOLD, 12));
+        startGameButton.setBackground(new Color(53, 66, 48));
         startGameButton.setForeground(Color.WHITE);
         startGameButton.addActionListener(new ActionListener(){
 
