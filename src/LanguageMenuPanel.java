@@ -20,7 +20,7 @@ public class LanguageMenuPanel extends JPanel {
 
         setLayout(null);
 
-        JLabel welcomeMsg = new JLabel("Please Select Your Alphabet:", SwingConstants.CENTER);
+        JLabel welcomeMsg = new JLabel("Please Select Your Alphabet:");
         welcomeMsg.setFont(new Font("Ariel", Font.BOLD, 22));
         welcomeMsg.setForeground(new Color(0,30,0));
         welcomeMsg.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - 150, 170, 600, 50);
