@@ -23,21 +23,21 @@ public class LanguageMenuPanel extends JPanel {
         JLabel welcomeMsg = new JLabel("Please Select Your Alphabet:", SwingConstants.CENTER);
         welcomeMsg.setFont(new Font("Ariel", Font.BOLD, 22));
         welcomeMsg.setForeground(new Color(0,30,0));
-        welcomeMsg.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - (300 / 2), 120, 300, 120);
+        welcomeMsg.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - 150, 170, 600, 50);
         add(welcomeMsg);
 
         JButton swedishLanguageButton = new JButton("Swedish");
         swedishLanguageButton.setFont(new Font("Ariel", Font.BOLD, 12));
         swedishLanguageButton.setForeground(Color.BLUE);
         swedishLanguageButton.setBackground(Color.yellow);
-        swedishLanguageButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) + 10, (CAPTCHASnakeGame.MENU_HEIGHT / 2) - (60 / 2), 80, 40);
+        swedishLanguageButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2), 250, 100, 40);
         add(swedishLanguageButton);
 
         JButton englishLanguageButton = new JButton("English");
         englishLanguageButton.setFont(new Font("Ariel", Font.BOLD, 12));
-        englishLanguageButton.setForeground(Color.red);
+        englishLanguageButton.setForeground(Color.WHITE);
         englishLanguageButton.setBackground(Color.BLUE);
-        englishLanguageButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - 90, (CAPTCHASnakeGame.MENU_HEIGHT / 2) - (60 / 2), 80, 40);
+        englishLanguageButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - 100, 250, 100, 40);
         add(englishLanguageButton);
 
         swedishLanguageButton.addActionListener(new ActionListener(){
