@@ -43,11 +43,6 @@ import java.awt.event.ActionListener;
     private final int TIME_LIMIT = 60;
     private int elapsedTimeMilliseconds;
 
-    private JButton mainMenuButton;
-    private JButton retryButton;
-    private JButton type_CAPTCHA_Button;
-    private JButton exitButton;
-
     private FontMetrics fontMetrics;
 
     GamePanel (GameFrame gameFrame) {
@@ -66,10 +61,6 @@ import java.awt.event.ActionListener;
         my_CAPTCHA_Puzzle = new CAPTCHA();
         my_CAPTCHA_Puzzle.generatePuzzle();
         my_CAPTCHA_PuzzleArrayListImage = my_CAPTCHA_Puzzle.getMy_CAPTCHA_ArrayListImage();
-        mainMenuButton = new JButton("Main Menu");
-        retryButton = new JButton("Retry");
-        type_CAPTCHA_Button = new JButton("Type CAPTCHA");
-        exitButton = new JButton("Exit");
 
         setFocusable(true);
         setLayout(null);
@@ -246,6 +237,7 @@ import java.awt.event.ActionListener;
             g.drawImage(my_CAPTCHA_PuzzleArrayListImage.get(i), (CAPTCHASnakeGame.GAME_WIDTH / 2) - (my_CAPTCHA_PuzzleArrayListImage.size() * 35 / 2) + (35 * i), 530, null);
         }
 
+        JButton exitButton = new JButton("Exit");
         exitButton.setForeground(Color.BLACK);
         exitButton.setBackground(new Color(32,178,170));
         exitButton.setBounds((CAPTCHASnakeGame.GAME_WIDTH / 2) - 50, 650, 100, 50);
@@ -283,6 +275,10 @@ import java.awt.event.ActionListener;
         fontMetrics = getFontMetrics(g.getFont());
 
         g.drawString("Verification Failed", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Verification Failed") / 2), 340);
+
+        JButton mainMenuButton = new JButton("Main Menu");
+        JButton retryButton = new JButton("Retry");
+        JButton type_CAPTCHA_Button = new JButton("Type CAPTCHA");
 
         retryButton.setForeground(Color.WHITE);
         type_CAPTCHA_Button.setForeground(Color.WHITE);
