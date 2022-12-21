@@ -21,10 +21,10 @@ class StartMenuPanel extends JPanel {
         setLayout(null);
         setVisible(true);
 
-        JLabel startMessageLabel = new JLabel("Welcome To CAPTCHA Snake", SwingConstants.CENTER);
+        JLabel startMessageLabel = new JLabel("Welcome To CAPTCHA Snake Game!", SwingConstants.CENTER);
         startMessageLabel.setFont(new Font("Comic Sans", Font.BOLD, 24));
         startMessageLabel.setForeground(new Color(0, 30, 0));
-        startMessageLabel.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - (400 / 2), 160, 400, 100);
+        startMessageLabel.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - 200, 160, 600, 100);
         this.add(startMessageLabel);
 
         JButton startGameButton= new JButton("Start Game");
@@ -59,13 +59,6 @@ class StartMenuPanel extends JPanel {
         customizeGameButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) + 10, 260, 100, 50);
         this.add(customizeGameButton);
 
-        JLabel label = new JLabel("Latest game size");
-
-        add(label);
-
-        JLabel label2 = new JLabel("Latest elapsed time");
-        
-        add(label2);
     }
 
     @Override
