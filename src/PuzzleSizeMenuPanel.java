@@ -20,8 +20,8 @@ public class PuzzleSizeMenuPanel extends JPanel {
         setLayout(null);
 
         JLabel messageLabel = new JLabel("Please Select Size of CAPTCHA Puzzle:", SwingConstants.CENTER);
-        messageLabel.setFont(new Font("Ariel", Font.BOLD, 22));
-        messageLabel.setForeground(new Color(0, 30, 0));
+        messageLabel.setFont(new Font("ComicSans", Font.BOLD, 22));
+        messageLabel.setForeground(Color.WHITE);
         messageLabel.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - 300, 170, 600, 50);
         add(messageLabel);
 
@@ -86,9 +86,9 @@ public class PuzzleSizeMenuPanel extends JPanel {
     public void paintComponent (Graphics g){
         super.paintComponent(g);
 
-        Image img = new ImageIcon("wallpapers/wallp1.jpg").getImage();
+        Image img = new ImageIcon("wallpapers/snakeGameBackground.png").getImage();
 
-        g.drawImage(img, 0, 0, null);
+        g.drawImage(img, 0, -230, null);
         
     }    
 }
