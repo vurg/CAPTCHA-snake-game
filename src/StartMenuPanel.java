@@ -21,10 +21,10 @@ class StartMenuPanel extends JPanel {
         setLayout(null);
         setVisible(true);
 
-        JLabel startMessageLabel = new JLabel("Welcome To CAPTCHA Snake Game!");
-        startMessageLabel.setFont(new Font("Ariel", Font.BOLD, 22));
-        startMessageLabel.setForeground(new Color(0, 30, 0));
-        startMessageLabel.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - 200, 170, 400, 50);
+        JLabel startMessageLabel = new JLabel("Welcome to the CAPTCHA Snake Game!", SwingConstants.CENTER);
+        startMessageLabel.setFont(new Font("ComicSans", Font.BOLD, 22));
+        startMessageLabel.setForeground(Color.WHITE);
+        startMessageLabel.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - 300, 170, 600, 50);
         this.add(startMessageLabel);
 
         JButton startGameButton= new JButton("Start Game");
@@ -44,7 +44,7 @@ class StartMenuPanel extends JPanel {
 
 
         JButton customizeGameButton = new JButton("Settings");
-        customizeGameButton.setFont(new Font("Comic Sans", Font.PLAIN, 12));
+        customizeGameButton.setFont(new Font("Ariel", Font.BOLD, 12));
         customizeGameButton.setBackground(new Color(85,107,47));
         customizeGameButton.setForeground(Color.WHITE);
         customizeGameButton.addActionListener(new ActionListener(){
@@ -65,9 +65,9 @@ class StartMenuPanel extends JPanel {
     public void paintComponent (Graphics g){
         super.paintComponent(g);
 
-        Image img = new ImageIcon("wallpapers/wallp1.jpg").getImage();
+        Image img = new ImageIcon("wallpapers/snakeGameBackground.png").getImage();
 
-        g.drawImage(img, 0, 0, null);
+        g.drawImage(img, 0, -230, null);
         
     }
 
