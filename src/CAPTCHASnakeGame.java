@@ -5,7 +5,7 @@ public class CAPTCHASnakeGame {
     public static final int GAME_WIDTH = 1680;
     public static final int GAME_HEIGHT = 840;
 
-    private static boolean includeSwedishLetters = false;
+    private static boolean includeSwedishLetters = true;
     private static int nrOf_CAPTCHA_Symbols = 6;
 
     public static void main(String[] args){
