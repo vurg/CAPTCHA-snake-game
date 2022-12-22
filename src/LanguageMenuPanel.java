@@ -20,10 +20,10 @@ public class LanguageMenuPanel extends JPanel {
 
         setLayout(null);
 
-        JLabel welcomeMsg = new JLabel("Please Select Your Alphabet:");
-        welcomeMsg.setFont(new Font("Ariel", Font.BOLD, 22));
-        welcomeMsg.setForeground(new Color(0,30,0));
-        welcomeMsg.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - 150, 170, 600, 50);
+        JLabel welcomeMsg = new JLabel("Please Select Your Alphabet:", SwingConstants.CENTER);
+        welcomeMsg.setFont(new Font("ComicSans", Font.BOLD, 22));
+        welcomeMsg.setForeground(Color.WHITE);
+        welcomeMsg.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - 300, 170, 600, 50);
         add(welcomeMsg);
 
         JButton swedishLanguageButton = new JButton("Swedish");
@@ -61,9 +61,9 @@ public class LanguageMenuPanel extends JPanel {
     public void paintComponent (Graphics g){
         super.paintComponent(g);
 
-        Image img = new ImageIcon("wallpapers/wallp1.jpg").getImage();
+        Image img = new ImageIcon("wallpapers/snakeGameBackground.png").getImage();
 
-        g.drawImage(img, 0, 0, null);
+        g.drawImage(img, 0, -230, null);
         
     }  
 }
