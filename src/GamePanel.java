@@ -6,6 +6,9 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.swing.SwingUtilities;
 
 import java.awt.Image;
@@ -17,12 +20,13 @@ import java.awt.Window;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
 
  class GamePanel extends JPanel implements ActionListener {
 
     private GameFrame gameFrame;
     private final int BLOCK_LENGTH = 35;
-    private final int NEW_FRAME_DELAY_MILLISECONDS = 200;
+    private final int NEW_FRAME_DELAY_MILLISECONDS = 100;
     
     private int nrOfSnakeBodyParts;
     private int nrOf_CAPTCHA_Taken;
@@ -123,6 +127,26 @@ import java.awt.event.ActionListener;
 
             timer.stop();
             drawVerificationSuccessScreen(g);
+
+            ObjectMapper mapper = new ObjectMapper();
+
+            UserSuccessRunStats userSuccessRunStats = new UserSuccessRunStats();
+
+            userSuccessRunStats.setCaptcha_Size(CAPTCHASnakeGame.getNrOf_CAPTCHA_Symbols());
+
+            int elapsedTime = elapsedTimeMilliseconds / 1000;
+
+            userSuccessRunStats.setElapsedTime(elapsedTime);
+
+            try {
+                
+                mapper.writeValue(new FileOutputStream("data/LastVerifiedRunData.json"), userSuccessRunStats);
+
+            } catch (Exception e){
+                
+                e.printStackTrace();
+
+            }
 
         } else if (gameIsRunning == false) {
 
@@ -251,7 +275,7 @@ import java.awt.event.ActionListener;
         g.setColor(new Color(230,230,0));
         fontMetrics = getFontMetrics(g.getFont());
 
-        g.drawString("Time Elapsed: " + (elapsedTimeMilliseconds / 1000) + "s", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Time Elapsed: " + (elapsedTimeMilliseconds / 1000) + "s") / 2), 400);
+        g.drawString("Time Elapsed: " + (elapsedTimeMilliseconds / 1000) + "s", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Elapsed Time: " + (elapsedTimeMilliseconds / 1000) + "s") / 2), 400);
 
         g.drawString("Game Size: " + my_CAPTCHA_PuzzleArrayListImage.size() + " Symbols", (CAPTCHASnakeGame.GAME_WIDTH / 2) - (fontMetrics.stringWidth("Game Size: " + my_CAPTCHA_PuzzleArrayListImage.size() + " Symbols") / 2), 480);
 

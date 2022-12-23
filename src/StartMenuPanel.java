@@ -1,5 +1,8 @@
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -7,9 +10,9 @@ import javax.swing.JLabel;
 import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Font;
-import java.awt.Label;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
 import java.awt.event.ActionEvent;
 
 
@@ -22,9 +25,9 @@ class StartMenuPanel extends JPanel {
         setVisible(true);
 
         JLabel startMessageLabel = new JLabel("Welcome to the CAPTCHA Snake Game!", SwingConstants.CENTER);
-        startMessageLabel.setFont(new Font("ComicSans", Font.BOLD, 22));
+        startMessageLabel.setFont(new Font("ComicSans", Font.BOLD, 24));
         startMessageLabel.setForeground(Color.WHITE);
-        startMessageLabel.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - 300, 170, 600, 50);
+        startMessageLabel.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2 ) - 300, 140, 600, 50);
         this.add(startMessageLabel);
 
         JButton startGameButton= new JButton("Start Game");
@@ -39,7 +42,7 @@ class StartMenuPanel extends JPanel {
                 new GameFrame();
             }
         });
-        startGameButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - 110, 260, 100, 50);
+        startGameButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - 110, 200, 100, 50);
         this.add(startGameButton);
 
 
@@ -56,8 +59,40 @@ class StartMenuPanel extends JPanel {
             }
         });
 
-        customizeGameButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) + 10, 260, 100, 50);
+        customizeGameButton.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) + 10, 200, 100, 50);
         this.add(customizeGameButton);
+
+        JLabel lastSessionTitle = new JLabel("Last Successful Verification:", SwingConstants.CENTER);
+        lastSessionTitle.setFont(new Font("ComicSans", Font.BOLD, 18));
+        lastSessionTitle.setForeground(Color.WHITE);
+        lastSessionTitle.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - (300 / 2), 280, 300, 40);
+        add(lastSessionTitle);
+
+        ObjectMapper mapper = new ObjectMapper();
+        
+        UserSuccessRunStats userSuccessRunStats = null;
+
+        try {
+
+            userSuccessRunStats = mapper.readValue(new FileInputStream("data/LastVerifiedRunData.json"), UserSuccessRunStats.class);
+
+        } catch (Exception e){
+
+            e.printStackTrace();
+
+        }
+
+        JLabel lastVerifiedSessionGameSize = new JLabel("Game Size: " + userSuccessRunStats.getCaptcha_Size() + " Symbols", SwingConstants.CENTER);
+        lastVerifiedSessionGameSize.setFont(new Font("ComicSans", Font.BOLD, 16));
+        lastVerifiedSessionGameSize.setForeground(Color.WHITE);
+        lastVerifiedSessionGameSize.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - (300 / 2), 310, 300, 40);
+        add(lastVerifiedSessionGameSize);
+       
+        JLabel lastVerifiedSessionElapsedTime = new JLabel("Elapsed Time: " + userSuccessRunStats.getElapsedTime() + "s", SwingConstants.CENTER);
+        lastVerifiedSessionElapsedTime.setFont(new Font("ComicSans", Font.BOLD, 16));
+        lastVerifiedSessionElapsedTime.setForeground(Color.WHITE);
+        lastVerifiedSessionElapsedTime.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - (300 / 2), 340, 300, 40);
+        add(lastVerifiedSessionElapsedTime);
 
     }
 
