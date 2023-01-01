@@ -88,11 +88,19 @@ class StartMenuPanel extends JPanel {
         lastVerifiedSessionGameSize.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - (300 / 2), 310, 300, 40);
         add(lastVerifiedSessionGameSize);
        
-        JLabel lastVerifiedSessionElapsedTime = new JLabel("Elapsed Time: " + userSuccessRunStats.getElapsedTime() + "s", SwingConstants.CENTER);
-        lastVerifiedSessionElapsedTime.setFont(new Font("ComicSans", Font.BOLD, 16));
-        lastVerifiedSessionElapsedTime.setForeground(Color.WHITE);
-        lastVerifiedSessionElapsedTime.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - (300 / 2), 340, 300, 40);
-        add(lastVerifiedSessionElapsedTime);
+       if (userSuccessRunStats.getElapsedTime() >= 0) {
+            JLabel lastVerifiedSessionElapsedTime = new JLabel("Elapsed Time: " + userSuccessRunStats.getElapsedTime() + "s", SwingConstants.CENTER);
+            lastVerifiedSessionElapsedTime.setFont(new Font("ComicSans", Font.BOLD, 16));
+            lastVerifiedSessionElapsedTime.setForeground(Color.WHITE);
+            lastVerifiedSessionElapsedTime.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - (300 / 2), 340, 300, 40);
+            add(lastVerifiedSessionElapsedTime);
+        }else if(userSuccessRunStats.getElapsedTime() == -1){
+            JLabel lastVerifiedSessionElapsedTime = new JLabel("(user verified by typing correct puzzle)", SwingConstants.CENTER);
+            lastVerifiedSessionElapsedTime.setFont(new Font("ComicSans", Font.BOLD, 16));
+            lastVerifiedSessionElapsedTime.setForeground(Color.WHITE);
+            lastVerifiedSessionElapsedTime.setBounds((CAPTCHASnakeGame.MENU_WIDTH / 2) - (300 / 2), 340, 300, 40);
+            add(lastVerifiedSessionElapsedTime);
+        }
 
     }
 

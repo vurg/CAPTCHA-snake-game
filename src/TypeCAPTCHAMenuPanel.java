@@ -46,6 +46,19 @@ import java.awt.event.ActionListener;
                     if(t.getText().equals(my_CAPTCHA_Puzzle.getMy_CAPTCHA_PuzzleString())){
                         l.setText("Congratulations! You are not a robot. Type Exit to leave the program.");
                         t.setText("");
+
+                        // Save verification to json file
+                        ObjectMapper mapper = new ObjectMapper();
+                        UserSuccessRunStats userSuccessRunStats = new UserSuccessRunStats();
+                        userSuccessRunStats.setCaptcha_Size(CAPTCHASnakeGame.getNrOf_CAPTCHA_Symbols());
+                        int elapsedTime = -1;
+                        userSuccessRunStats.setElapsedTime(elapsedTime);
+                        try {
+                            mapper.writeValue(new FileOutputStream("data/LastVerifiedRunData.json"), userSuccessRunStats);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        
                     }else if(t.getText().equals("Exit") || t.getText().equals("exit")) {
                         //closes window
                         JComponent comp = (JComponent) e.getSource();
