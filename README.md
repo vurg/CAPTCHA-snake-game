@@ -1,6 +1,12 @@
 # CAPTCHA Snake Game
 The goal of this project was to create a fun snake game that gamifies the solving of CAPTCHA puzzles. It solves the problem of users needing to switch between different keyboard languages to verify that they are human.
 
+<img src="https://imgur.com/Rm957nO.jpg" alt="Image 1" style="height: 500px;">
+<img src="https://imgur.com/s9k4Ijh.jpg" alt="Image 1" style="height: 500px;">
+<img src="https://imgur.com/BHcsP01.jpg" alt="Image 1" style="height: 500px;">
+<img src="https://imgur.com/NqpVCdy.jpg" alt="Image 1" style="height: 500px;">
+<img src="https://imgur.com/DBO9fR3.jpg" alt="Image 1" style="height: 500px;">
+
 ### Git Clone the GitLab repository:
 
 [GitLab Repository](https://git.chalmers.se/nasit/group16teamprogramming.git)
