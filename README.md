@@ -1,11 +1,18 @@
 # CAPTCHA Snake Game
 The goal of this project was to create a fun snake game that gamifies the solving of CAPTCHA puzzles. It solves the problem of users needing to switch between different keyboard languages to verify that they are human.
+ 
+<img src="https://imgur.com/Rm957nO.jpg" alt="Logo" width="1000">
+<img src="https://imgur.com/s9k4Ijh.jpg" alt="Logo" width="1000">
+<img src="https://imgur.com/BHcsP01.jpg" alt="Logo" width="1000">
+<img src="https://imgur.com/NqpVCdy.jpg" alt="Logo" width="1000">
+<img src="https://imgur.com/DBO9fR3.jpg" alt="Logo" width="1000">
 
-<img src="https://imgur.com/Rm957nO.jpg" alt="Image 1" style="height: 80vh;">
-<img src="https://imgur.com/s9k4Ijh.jpg" alt="Image 1" style="height: 80vh;">
-<img src="https://imgur.com/BHcsP01.jpg" alt="Image 1" style="height: 80vh;">
-<img src="https://imgur.com/NqpVCdy.jpg" alt="Image 1" style="height: 80vh;">
-<img src="https://imgur.com/DBO9fR3.jpg" alt="Image 1" style="height: 80vh;">
+<img src="https://imgur.com/Rm957nO.jpg" alt="Image 1" style="width: 50%;">
+<img src="https://imgur.com/s9k4Ijh.jpg" alt="Image 2" style="width: 50%;">
+<img src="https://imgur.com/BHcsP01.jpg" alt="Image 3" style="width: 50%;">
+<img src="https://imgur.com/NqpVCdy.jpg" alt="Image 4" style="width: 50%;">
+<img src="https://imgur.com/DBO9fR3.jpg" alt="Image 5" style="width: 50%;">
+
 
 ### Git Clone the GitLab repository:
 
