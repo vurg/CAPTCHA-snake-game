@@ -6,7 +6,7 @@ The goal of this project was to create a fun snake game that gamifies the solvin
 <img src="https://imgur.com/BHcsP01.jpg" alt="Snake Game 3" width="1000">
 <img src="https://imgur.com/NqpVCdy.jpg" alt="Snake Game 4" width="1000">
 <img src="https://imgur.com/DBO9fR3.jpg" alt="Snake Game 5" width="1000">
-
+<img src="https://imgur.com/seCauBa.jpg" alt="Snake Game 6" width="1000">
 
 ### Git Clone the GitLab repository:
 
